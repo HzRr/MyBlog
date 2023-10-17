@@ -164,7 +164,34 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">CountBits</span> <span class="params">(<span class="type">unsigned</span> <span class="type">int</span> x )</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">unsigned</span> <span class="type">int</span> mask[] = &#123; <span class="number">0x55555555</span>,</span><br><span class="line">        <span class="number">0x33333333</span>,</span><br><span class="line">        <span class="number">0x0F0F0F0F</span>,</span><br><span class="line">        <span class="number">0x00FF00FF</span>,</span><br><span class="line">        <span class="number">0x0000FFFF</span></span><br><span class="line">        &#125; ;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> i ;</span><br><span class="line">        <span class="type">int</span> shift ; <span class="comment">/* Number of positions to shift to right*/</span></span><br><span class="line">        <span class="keyword">for</span> ( i =<span class="number">0</span>, shift =<span class="number">1</span>; i &lt; <span class="number">5</span>; i ++, shift *= <span class="number">2</span>)</span><br><span class="line">                x = (x &amp; mask[i ])+ ( ( x &gt;&gt; shift) &amp; mask[i]);</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>Find out the logic used in the above program.</p>
-<h4 id="分析：-1"><a href="#分析：-1" class="headerlink" title="分析："></a>分析：</h4><p>+—————+————————+<br>|    十六进制   |         二进制         |<br>+—————+————————+<br>| 0x55555555    | 01010101010101010101010101010101 |<br>| 0x33333333    | 00110011001100110011001100110011 |<br>| 0x0F0F0F0F    | 00001111000011110000111100001111 |<br>| 0x00FF00FF    | 00000000111111110000000011111111 |<br>| 0x0000FFFF    | 00000000000000001111111111111111 |<br>+—————+————————+</p>
+<h4 id="分析：-1"><a href="#分析：-1" class="headerlink" title="分析："></a>分析：</h4><table>
+<thead>
+<tr>
+<th>十六进制</th>
+<th>二进制</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0x55555555</td>
+<td>01010101010101010101010101010101</td>
+</tr>
+<tr>
+<td>0x33333333</td>
+<td>00110011001100110011001100110011</td>
+</tr>
+<tr>
+<td>0x0F0F0F0F</td>
+<td>00001111000011110000111100001111</td>
+</tr>
+<tr>
+<td>0x00FF00FF</td>
+<td>00000000111111110000000011111111</td>
+</tr>
+<tr>
+<td>0x0000FFFF</td>
+<td>00000000000000001111111111111111</td>
+</tr>
+</tbody></table>
 <p>在统计每个 (unsigned int) x的二进制位有多少个1时，它使用了上述五个掩码(mask), 观察发现：这五个掩码的二进制值是按照 ** 01 -&gt; 0011 -&gt; 00001111 -&gt; 0000000011111111 -&gt; 00000000000000001111111111111111** 的规律变化的，而偏移量(shift)的值也与1的数目相关 <strong>1 -&gt; 2 -&gt; 4 -&gt; 8 -&gt; 16</strong></p>
 <p>而根据表达式 x &#x3D; (x &amp; mask[i ])+ ( ( x &gt;&gt; shift) &amp; mask[i]); 可以看出： 第一次是计算每两位的1的数目并储存在两个bit内, 第二次是计算每四位的1的数目并储存在4个bit内……以此类推，最后计算每32位(即x)的二进制位中1的数目并储存在32个bit内(即x所在内存块)</p>
 <h2 id="Puzzle-9"><a href="#Puzzle-9" class="headerlink" title="Puzzle 9"></a>Puzzle 9</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="type">float</span> f=<span class="number">0.0f</span>;</span><br><span class="line">        <span class="type">int</span> i;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</span><br><span class="line">                f = f + <span class="number">0.1f</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(f == <span class="number">1.0f</span>)</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;f is 1.0 \n&quot;</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;f is NOT 1.0\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
