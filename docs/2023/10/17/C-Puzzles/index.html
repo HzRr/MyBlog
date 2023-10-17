@@ -11,12 +11,14 @@
 
 <title>C-Puzzles</title>
 <meta name="keywords" content="C-Puzzles, HzRr&#39;s Blog">
-<meta name="description" content="C PuzzlesPuzzle 1The expected output of the following C program is to print the elements in the array. But when actually">
+<meta name="description" content="C Puzzles题目链接
+Puzzle 1The expected output of the following C program is to print the elements in the array. But when act">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta property="og:title" content="C-Puzzles">
-<meta property="og:description" content="C PuzzlesPuzzle 1The expected output of the following C program is to print the elements in the array. But when actually">
+<meta property="og:description" content="C Puzzles题目链接
+Puzzle 1The expected output of the following C program is to print the elements in the array. But when act">
 
 <link rel="shortcut icon" href="/null">
 <link rel="stylesheet" href="/style/main.css">
@@ -100,7 +102,8 @@
       </div>
       <div class="post-content-wrapper">
         <div class="post-content">
-          <h1 id="C-Puzzles"><a href="#C-Puzzles" class="headerlink" title="C Puzzles"></a>C Puzzles</h1><h2 id="Puzzle-1"><a href="#Puzzle-1" class="headerlink" title="Puzzle 1"></a>Puzzle 1</h2><p>The expected output of the following C program is to print the elements in the array. But when actually run, it doesn’t do so.</p>
+          <h1 id="C-Puzzles"><a href="#C-Puzzles" class="headerlink" title="C Puzzles"></a>C Puzzles</h1><p><a target="_blank" rel="noopener" href="http://gowrikumar.com/c/index.html">题目链接</a></p>
+<h2 id="Puzzle-1"><a href="#Puzzle-1" class="headerlink" title="Puzzle 1"></a>Puzzle 1</h2><p>The expected output of the following C program is to print the elements in the array. But when actually run, it doesn’t do so.</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TOTAL_ELEMENTS (sizeof(array) / sizeof(array[0]))</span></span><br><span class="line"><span class="type">int</span> <span class="built_in">array</span>[] = &#123;<span class="number">23</span>,<span class="number">34</span>,<span class="number">12</span>,<span class="number">17</span>,<span class="number">204</span>,<span class="number">99</span>,<span class="number">16</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> d;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(d=<span class="number">-1</span>;d &lt;= (TOTAL_ELEMENTS<span class="number">-2</span>);d++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,<span class="built_in">array</span>[d+<span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>Find out what’s going wrong.</p>
