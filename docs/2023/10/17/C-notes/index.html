@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+
+    
+<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>C_notes</title>
+<meta name="keywords" content="C_notes, HzRr&#39;s Blog">
+<meta name="description" content="C语言学习笔记数据类型整型C语言中的char型是否为无符号数还是有符号数是Implementation Defined, 由编译器决定。（C标准的Rationale之一：优先考虑效率，而可移植性尚在其次）
+如果为了可移植性，就必须写明是si">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="C_notes">
+<meta property="og:description" content="C语言学习笔记数据类型整型C语言中的char型是否为无符号数还是有符号数是Implementation Defined, 由编译器决定。（C标准的Rationale之一：优先考虑效率，而可移植性尚在其次）
+如果为了可移植性，就必须写明是si">
+
+<link rel="shortcut icon" href="/null">
+<link rel="stylesheet" href="/style/main.css">
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://example.com">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="http://example.com">
+        <h1 class="site-title">HzRr&#39;s Blog</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/archives" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">C_notes</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2023-10-17</span>
+        
+          <span>
+          <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="/tags/C/">
+              C
+                
+                  ，
+                
+              </a>
+            
+              <a href="/tags/Notes/">
+              Notes
+                
+              </a>
+            
+          </span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <h1 id="C语言学习笔记"><a href="#C语言学习笔记" class="headerlink" title="C语言学习笔记"></a>C语言学习笔记</h1><h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><h3 id="整型"><a href="#整型" class="headerlink" title="整型"></a>整型</h3><p>C语言中的char型是否为无符号数还是有符号数是Implementation Defined, 由编译器决定。（<strong>C标准的Rationale之一：优先考虑效率，而可移植性尚在其次</strong>）</p>
+<p>如果为了可移植性，就必须写明是signed还是unsigned。<br>整形还包括: short int, int, long int, long long int等几种</p>
+<p>对于<strong>有符号数</strong>在计算机中的表示是Sign and Magnitude、1’s Complement还是2’s Complement, C标准也没有明确规定，也是Implementation Defined。（<strong>大多数体系结构都采用2’s Complement表示法，x86平台也是如此</strong>）</p>
+<p>除了char型在C标准中明确规定占一个字节之外，其它整型占几个字节都是Implementation Defined。通常的编译器实现遵守ILP32或LP64规范，如下表所示。</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>ILP32（位数）</th>
+<th>LP64（位数）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>char</td>
+<td>8</td>
+<td>8</td>
+</tr>
+<tr>
+<td>short</td>
+<td>16</td>
+<td>16</td>
+</tr>
+<tr>
+<td>int</td>
+<td>32</td>
+<td>32</td>
+</tr>
+<tr>
+<td>long</td>
+<td>32</td>
+<td>64</td>
+</tr>
+<tr>
+<td>long long</td>
+<td>64</td>
+<td>64</td>
+</tr>
+<tr>
+<td>pointer</td>
+<td>32</td>
+<td>64</td>
+</tr>
+</tbody></table>
+<p>ILP32这个缩写的意思是int（I）、long（L）和指针（P）类型都占32位，通常32位计算机的C编译器采用这种规范，x86平台的gcc也是如此。LP64是指long（L）和指针占64位，通常64位计算机的C编译器采用这种规范。</p>
+<p>C标准规定的浮点型有float、double、long double，和整型一样，既没有规定每种类型占多少字节，也没有规定采用哪种表示形式。浮点数的实现在各种平台上差异很大，有的处理器有浮点运算单元（FPU，Floating Point Unit），称为硬浮点（Hard-float）实现；有的处理器没有浮点运算单元，只能做整数运算，需要用整数运算来模拟浮点运算，称为软浮点（Soft-float）实现。大部分平台的浮点数实现遵循IEEE 754，float型通常是32位，double型通常是64位。</p>
+<p>long double型通常是比double型精度更高的类型，但各平台的实现有较大差异。在x86平台上，大多数编译器实现的long double型是80位，因为x86的浮点运算单元具有80位精度，gcc实现的long double型是12字节（96位），<strong>这是为了对齐到4字节边界</strong>，也有些编译器实现的long double型和double型精度相同，没有充分利用x86浮点运算单元的精度。其它体系结构的浮点运算单元的精度不同，编译器实现也会不同，例如PowerPC上的long double型通常是128位。</p>
+<h3 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h3><pre><code>[直达链接](https://akaedu.github.io/book/ch15s03.html)
+</code></pre>
+
+        </div>
+          
+        <div class="top-div">
+          <ol class="top-box"><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0"><span class="top-box-text">C语言学习笔记</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="top-box-text">数据类型</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E6%95%B4%E5%9E%8B"><span class="top-box-text">整型</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="top-box-text">类型转换</span></a></li></ol></li></ol></li></ol>
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2023/10/17/%E5%9B%BE%E7%81%B5%E6%9C%BA%E4%BD%9C%E4%B8%9A/">
+          <h3 class="post-title">
+            下一篇：图灵机作业
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/hzrr" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+
