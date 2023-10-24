@@ -283,8 +283,72 @@
 <h4 id="2-3-errno与perror函数"><a href="#2-3-errno与perror函数" class="headerlink" title="2.3. errno与perror函数"></a>2.3. errno与perror函数</h4><p><code>errno</code>在头文件errno.h中声明，是一个整形变量，所有错误码都是正整数。一般使用<code>perror</code>或<code>strerror</code>函数将<code>errno</code>解释称字符串再打印</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">perror</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *s)</span>;</span><br></pre></td></tr></table></figure>
 
-<p>perror函数的输出是： 先打印<code>s</code>所指的字符串，然后打印”:”，然后根据当前<code>errno</code>的值打印错误原因</p>
-<p><strong>ps:</strong> <code>perror</code>的side effect会改变<code>errno</code>的值，因此调用完perror后，errno的值已经改变</p>
+<p><code>perror</code>函数的输出是： 先打印<code>s</code>所指的字符串，然后打印”:”，然后根据当前<code>errno</code>的值打印错误原因</p>
+<p><strong>ps:</strong> <code>perror</code>等的<strong>系统函数</strong>具有的side effect会改变<code>errno</code>的值(例外如： <code>strcpy</code>)，因此调用完<code>perror</code>后，<code>errno</code>的值已经改变</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> *<span class="title function_">strerror</span><span class="params">(<span class="type">int</span> errnum)</span>;</span><br></pre></td></tr></table></figure>
+
+<p><code>strerror</code>函数可以根据错误号返回错误原因字符串，因此可以这样输出到<code>stderr</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">fputs</span>(strerror(n), <span class="built_in">stderr</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-4-以字节为单位的I-O函数"><a href="#2-4-以字节为单位的I-O函数" class="headerlink" title="2.4.  以字节为单位的I&#x2F;O函数"></a>2.4.  以字节为单位的I&#x2F;O函数</h4><p>fgetc函数从指定的文件中读一个字节，getchar从标准输入读一个字节，因此<code>getchar()</code>与<code>fgetc(stdin)</code>等价</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">fgetc</span><span class="params">(FILE *stream)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">getchar</span><span class="params">(<span class="type">void</span>)</span>;</span><br><span class="line"><span class="comment">// 返回值：成功返回读到的字节，出错或者读到文件末尾时返回EOF</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>ps:</strong> 可以看到，<code>fgetc</code>和<code>getchar</code>的返回值都是<code>int</code>型，原因是有可能会返回EOF, 即-1（保存在<code>int</code>型中为0xffffffff）,如果返回值为unsigned char，则无法区分返回值是EOF还是字节0xff，因此，<strong>fgetc&#x2F;getchar的返回值一定要保存在int型变量中。</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">fputc</span><span class="params">(<span class="type">int</span> c, FILE *stream)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">putchar</span><span class="params">(<span class="type">int</span> c)</span>;</span><br><span class="line"><span class="comment">// 返回值：成功返回写入的字节，出错返回EOF</span></span><br></pre></td></tr></table></figure>
+
+<p>当调用<code>getchar()</code>或<code>fgetc(stdin)</code>时，如果用户没有输入字符，它就会<strong>阻塞等待</strong>，函数调用不返回，只有<strong>当用户输入回车或者到达文件末尾时</strong><code>getchar</code>才返回</p>
+<h4 id="2-5-操作读写位置的函数"><a href="#2-5-操作读写位置的函数" class="headerlink" title="2.5. 操作读写位置的函数"></a>2.5. 操作读写位置的函数</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">fseek</span><span class="params">(FILE *stream, <span class="type">long</span> offset, <span class="type">int</span> whence)</span>;</span><br><span class="line"><span class="comment">// 返回值：成功返回0，出错返回-1并设置errno</span></span><br><span class="line"></span><br><span class="line"><span class="type">long</span> <span class="title function_">ftell</span><span class="params">(FILE *stream)</span>;</span><br><span class="line"><span class="comment">// 返回值：成功返回当前读写位置，出错返回-1并设置errno</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">rewind</span><span class="params">(FILE *stream)</span>;</span><br><span class="line"><span class="comment">// 把读写位置移到文件开头</span></span><br></pre></td></tr></table></figure>
+
+<p><code>fseek</code>的<code>whence</code>和<code>offset</code>参数共同决定了读写位置移动到何处，<code>whence</code>参数的含义如下：</p>
+<ul>
+<li><p><code>SEEK_SET</code></p>
+<p>从文件开头移动<code>offset</code>个字节</p>
+</li>
+<li><p><code>SEEK_CUR</code></p>
+<p>从当前位置移动<code>offset</code>个字节</p>
+</li>
+<li><p><code>SEEK_END</code></p>
+<p>从文件末尾移动<code>offset</code>个字节</p>
+</li>
+</ul>
+<p><code>offset</code><strong>可正可负</strong>，<strong>负值</strong>表示向前（向文件开头的方向）移动，<strong>正值</strong>表示向后（向文件末尾的方向）移动，如果<strong>向前移动的字节数超过了文件开头则出错返回</strong>，如果向后移动的字节数超过了文件末尾，再次写入时将<strong>增大文件尺寸，从原来的文件末尾到<code>fseek</code>移动之后的读写位置之间的字节都是0。</strong></p>
+<h4 id="2-6-以字符串为单位的I-O函数"><a href="#2-6-以字符串为单位的I-O函数" class="headerlink" title="2.6. 以字符串为单位的I&#x2F;O函数"></a>2.6. 以字符串为单位的I&#x2F;O函数</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> *<span class="title function_">fgets</span><span class="params">(<span class="type">char</span> *s, <span class="type">int</span> size, FILE *stream)</span>;</span><br><span class="line"><span class="type">char</span> *<span class="title function_">gets</span><span class="params">(<span class="type">char</span> *s)</span>;</span><br><span class="line"><span class="comment">// 返回值：成功时s指向哪返回的指针就指向哪，出错或者读到文件末尾时返回NULL</span></span><br></pre></td></tr></table></figure>
+
+<p><code>fgets</code>函数的参数：</p>
+<ul>
+<li><p><code>s</code>是缓冲区的首地址</p>
+</li>
+<li><p><code>size</code>是缓冲区的长度</p>
+<blockquote>
+<p>该函数从<code>stream</code>所指的文件中读取以<code>&#39;\n&#39;</code>结尾的一行（包括<code>&#39;\n&#39;</code>在内）存到缓冲区<code>s</code>中，并且在该行末尾添加一个<code>&#39;\0&#39;</code>组成完整的字符串。</p>
+<p>如果文件中的一行太长，<code>fgets</code>从文件中读了<code>size-1</code>个字符还没有读到<code>&#39;\n&#39;</code>，就把已经读到的<code>size-1</code>个字符和一个<code>&#39;\0&#39;</code>字符存入缓冲区，文件中剩下的半行可以在下次调用<code>fgets</code>时继续读。</p>
+<p>如果一次<code>fgets</code>调用在读入若干个字符后到达文件末尾，则将已读到的字符串加上<code>&#39;\0&#39;</code>存入缓冲区并返回，如果再次调用<code>fgets</code>则返回<code>NULL</code>，可以据此判断是否读到文件末尾。</p>
+</blockquote>
+</li>
+<li><p><code>stream</code>是文件指针</p>
+</li>
+</ul>
+<blockquote>
+<p>注意，对于<code>fgets</code>来说，<code>&#39;\n&#39;</code>是一个特别的字符，而<code>&#39;\0&#39;</code>并无任何特别之处，如果读到<code>&#39;\0&#39;</code>就当作普通字符读入。如果文件中存在<code>&#39;\0&#39;</code>字符（或者说0x00字节），调用<code>fgets</code>之后就无法判断缓冲区中的<code>&#39;\0&#39;</code>究竟是从文件读上来的字符还是由<code>fgets</code>自动添加的结束符，所以<code>fgets</code>只适合读文本文件而不适合读二进制文件，并且文本文件中的所有字符都应该是可见字符，不能有<code>&#39;\0&#39;</code>。</p>
+</blockquote>
+<p><strong>Never use gets()!!!</strong></p>
+<blockquote>
+<p><code>gets</code>函数的存在只是为了兼容以前的程序，我们写的代码都不应该调用这个函数。<code>gets</code>函数的接口设计得很有问题，就像<code>strcpy</code>一样，用户提供一个缓冲区，却不能指定缓冲区的大小，很可能导致缓冲区溢出错误，这个函数比<code>strcpy</code>更加危险，<code>strcpy</code>的输入和输出都来自程序内部，只要程序员小心一点就可以避免出问题，而<code>gets</code>读取的输入直接来自程序外部，用户可能通过标准输入提供任意长的字符串，程序员无法避免<code>gets</code>函数导致的缓冲区溢出错误，所以唯一的办法就是不要用它。</p>
+</blockquote>
+<p><code>fputs</code>向指定的文件写入一个字符串，<code>puts</code>向标准输出写入一个字符串。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">fputs</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *s, FILE *stream)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">puts</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *s)</span>;</span><br><span class="line"><span class="comment">// 返回值：成功返回一个非负整数，出错返回EOF</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>缓冲区<code>s</code>中保存的是以<code>&#39;\0&#39;</code>结尾的字符串，<code>fputs</code>将该字符串写入文件<code>stream</code>，但并不写入结尾的<code>&#39;\0&#39;</code>。与<code>fgets</code>不同的是，<code>fputs</code>并不关心的字符串中的<code>&#39;\n&#39;</code>字符，字符串中可以有<code>&#39;\n&#39;</code>也可以没有<code>&#39;\n&#39;</code>。<code>puts</code>将字符串<code>s</code>写到标准输出（不包括结尾的<code>&#39;\0&#39;</code>），然后自动写一个<code>&#39;\n&#39;</code>到标准输出。</p>
+</blockquote>
+<h4 id="2-7-以记录为单位的I-O函数"><a href="#2-7-以记录为单位的I-O函数" class="headerlink" title="2.7. 以记录为单位的I&#x2F;O函数"></a>2.7. 以记录为单位的I&#x2F;O函数</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">size_t</span> <span class="title function_">fread</span><span class="params">(<span class="type">void</span> *ptr, <span class="type">size_t</span> size, <span class="type">size_t</span> nmemb, FILE *stream)</span>;</span><br><span class="line"><span class="type">size_t</span> <span class="title function_">fwrite</span><span class="params">(<span class="type">const</span> <span class="type">void</span> *ptr, <span class="type">size_t</span> size, <span class="type">size_t</span> nmemb, FILE *stream)</span>;</span><br><span class="line"><span class="comment">// 返回值：读或写的记录数，成功时返回的记录数等于nmemb，出错或读到文件末尾时返回的记录数小于nmemb，也可能返回0</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
 <h2 id="一些奇奇怪怪的方法"><a href="#一些奇奇怪怪的方法" class="headerlink" title="一些奇奇怪怪的方法"></a>一些奇奇怪怪的方法</h2><h3 id="1-typedef-分析复杂声明"><a href="#1-typedef-分析复杂声明" class="headerlink" title="1. typedef 分析复杂声明"></a>1. typedef 分析复杂声明</h3><p>在分析复杂声明时，要借助typedef把复杂声明分解成几种基本形式：</p>
 <ul>
 <li><p>T *p;，p是指向T类型的指针。</p>
