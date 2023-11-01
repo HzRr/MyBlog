@@ -298,7 +298,7 @@
 <p><strong>ps:</strong> 可以看到，<code>fgetc</code>和<code>getchar</code>的返回值都是<code>int</code>型，原因是有可能会返回EOF, 即-1（保存在<code>int</code>型中为0xffffffff）,如果返回值为unsigned char，则无法区分返回值是EOF还是字节0xff，因此，<strong>fgetc&#x2F;getchar的返回值一定要保存在int型变量中。</strong></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">fputc</span><span class="params">(<span class="type">int</span> c, FILE *stream)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">putchar</span><span class="params">(<span class="type">int</span> c)</span>;</span><br><span class="line"><span class="comment">// 返回值：成功返回写入的字节，出错返回EOF</span></span><br></pre></td></tr></table></figure>
 
-<p>当调用<code>getchar()</code>或<code>fgetc(stdin)</code>时，如果用户没有输入字符，它就会<strong>阻塞等待</strong>，函数调用不返回，只有<strong>当用户输入回车或者到达文件末尾时</strong><code>getchar</code>才返回</p>
+<p>当调用<code>getchar()</code>或<code>fgetc(stdin)</code>时，如果用户没有输入字符，它就会<strong>阻塞等待</strong>，函数调用不返回，只有<strong>当用户输入回车或者到达文件末尾时</strong><code>getchar</code>才返回(<em><strong>这些特性取决于终端的工作模式，终端可以配置成一次一行的模式，也可以配置成一次一个字符的模式，默认是一次一行的模式</strong></em>)</p>
 <h4 id="2-5-操作读写位置的函数"><a href="#2-5-操作读写位置的函数" class="headerlink" title="2.5. 操作读写位置的函数"></a>2.5. 操作读写位置的函数</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">fseek</span><span class="params">(FILE *stream, <span class="type">long</span> offset, <span class="type">int</span> whence)</span>;</span><br><span class="line"><span class="comment">// 返回值：成功返回0，出错返回-1并设置errno</span></span><br><span class="line"></span><br><span class="line"><span class="type">long</span> <span class="title function_">ftell</span><span class="params">(FILE *stream)</span>;</span><br><span class="line"><span class="comment">// 返回值：成功返回当前读写位置，出错返回-1并设置errno</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">rewind</span><span class="params">(FILE *stream)</span>;</span><br><span class="line"><span class="comment">// 把读写位置移到文件开头</span></span><br></pre></td></tr></table></figure>
 
 <p><code>fseek</code>的<code>whence</code>和<code>offset</code>参数共同决定了读写位置移动到何处，<code>whence</code>参数的含义如下：</p>
@@ -364,10 +364,31 @@
 </ul>
 <p>C标准库的I&#x2F;O缓冲区有三种类型：全缓冲、行缓冲和无缓冲。当用户程序调用库函数做写操作时，不同类型的缓冲区具有不同的特性。</p>
 <ul>
-<li><strong>全缓冲：</strong>如果缓冲区写满了就写回内核。常规文件通常是全缓冲的。</li>
-<li><strong>行缓冲：</strong> 如果用户程序写的数据中有换行符就把这一行写回内核，或者如果缓冲区写满了就写回内核。标准输入和标准输出对应终端设备时通常是行缓冲的。</li>
-<li><strong>无缓冲：</strong>用户程序每次调库函数做写操作都要通过系统调用写回内核。标准错误输出通常是无缓冲的，这样用户程序产生的错误信息可以尽快输出到设备。</li>
+<li><p><strong>全缓冲：</strong>如果缓冲区写满了就写回内核。常规文件通常是全缓冲的。</p>
+</li>
+<li><p><strong>行缓冲：</strong> 如果用户程序写的数据中有换行符就把这一行写回内核，或者如果缓冲区写满了就写回内核。标准输入和标准输出对应终端设备时通常是行缓冲的。</p>
+<blockquote>
+<p>除了写满缓冲区、写入换行符之外，行缓冲还有一种情况会自动做Flush操作。如果：</p>
+<ul>
+<li>用户程序调用库函数从无缓冲的文件中读取</li>
 </ul>
+<ul>
+<li><p>或者从行缓冲的文件中读取，并且这次读操作会引发系统调用从内核读取数据</p>
+<blockquote>
+<p>虽然调用<code>printf</code>并不会把字符串写到设备，但紧接着调用<code>fgets</code>读一个行缓冲的文件（标准输入），在读取之前会自动Flush所有行缓冲，包括标准输出。</p>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+</li>
+<li><p><strong>无缓冲：</strong>用户程序每次调库函数做写操作都要通过系统调用写回内核。标准错误输出通常是无缓冲的，这样用户程序产生的错误信息可以尽快输出到设备。</p>
+</li>
+</ul>
+<p>如果用户程序不想完全依赖于自动的Flush操作，可以调<code>fflush</code>函数手动做Flush操作。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">fflush</span><span class="params">(FILE *stream)</span>;</span><br><span class="line"><span class="comment">// 返回值：成功返回0，出错返回EOF并设置errno</span></span><br></pre></td></tr></table></figure>
+
+<p>虽然字符串中没有换行，但用户程序调用<code>fflush</code>强制写回内核，因此也能在屏幕上打印出字符串。<code>fflush</code>函数用于确保数据写回了内核，以免进程异常终止时丢失数据。</p>
+<p>作为一个特例，调用<code>fflush(NULL)</code>可以对所有打开文件的I&#x2F;O缓冲区做Flush操作。</p>
 <h2 id="一些奇奇怪怪的方法"><a href="#一些奇奇怪怪的方法" class="headerlink" title="一些奇奇怪怪的方法"></a>一些奇奇怪怪的方法</h2><h3 id="1-typedef-分析复杂声明"><a href="#1-typedef-分析复杂声明" class="headerlink" title="1. typedef 分析复杂声明"></a>1. typedef 分析复杂声明</h3><p>在分析复杂声明时，要借助typedef把复杂声明分解成几种基本形式：</p>
 <ul>
 <li><p>T *p;，p是指向T类型的指针。</p>
