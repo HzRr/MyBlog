@@ -345,10 +345,29 @@
 </blockquote>
 <h4 id="2-7-以记录为单位的I-O函数"><a href="#2-7-以记录为单位的I-O函数" class="headerlink" title="2.7. 以记录为单位的I&#x2F;O函数"></a>2.7. 以记录为单位的I&#x2F;O函数</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">size_t</span> <span class="title function_">fread</span><span class="params">(<span class="type">void</span> *ptr, <span class="type">size_t</span> size, <span class="type">size_t</span> nmemb, FILE *stream)</span>;</span><br><span class="line"><span class="type">size_t</span> <span class="title function_">fwrite</span><span class="params">(<span class="type">const</span> <span class="type">void</span> *ptr, <span class="type">size_t</span> size, <span class="type">size_t</span> nmemb, FILE *stream)</span>;</span><br><span class="line"><span class="comment">// 返回值：读或写的记录数，成功时返回的记录数等于nmemb，出错或读到文件末尾时返回的记录数小于nmemb，也可能返回0</span></span><br></pre></td></tr></table></figure>
 
+<p>这里的记录是指<strong>一串固定长度的字节</strong>，比如一个<code>int</code>、一个结构体或者一个定长数组。参数<code>size</code>指出一条记录的长度，而<code>nmemb</code>指出要读或写多少条记录，这些记录在<code>ptr</code>所指的内存空间中连续存放，共占<code>size * nmemb</code>个字节</p>
+<h4 id="2-8-格式化I-O函数"><a href="#2-8-格式化I-O函数" class="headerlink" title="2.8. 格式化I&#x2F;O函数"></a>2.8. 格式化I&#x2F;O函数</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">printf</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *format, ...)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">fprintf</span><span class="params">(FILE *stream, <span class="type">const</span> <span class="type">char</span> *format, ...)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">sprintf</span><span class="params">(<span class="type">char</span> *str, <span class="type">const</span> <span class="type">char</span> *format, ...)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">snprintf</span><span class="params">(<span class="type">char</span> *str, <span class="type">size_t</span> size, <span class="type">const</span> <span class="type">char</span> *format, ...)</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdarg.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">vprintf</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *format, va_list ap)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">vfprintf</span><span class="params">(FILE *stream, <span class="type">const</span> <span class="type">char</span> *format, va_list ap)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">vsprintf</span><span class="params">(<span class="type">char</span> *str, <span class="type">const</span> <span class="type">char</span> *format, va_list ap)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">vsnprintf</span><span class="params">(<span class="type">char</span> *str, <span class="type">size_t</span> size, <span class="type">const</span> <span class="type">char</span> *format, va_list ap)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回值：成功返回格式化输出的字节数（不包括字符串的结尾&#x27;\0&#x27;），出错返回一个负值</span></span><br></pre></td></tr></table></figure>
 
 
 
-
+<h4 id="2-9-C标准库的I-O缓冲区"><a href="#2-9-C标准库的I-O缓冲区" class="headerlink" title="2.9. C标准库的I&#x2F;O缓冲区"></a>2.9. C标准库的I&#x2F;O缓冲区</h4><p>C标准库为每个打开的文件分配一个I&#x2F;O缓冲区来加速读写操作（<em>通过FILE结构体可以找到这个缓冲区</em>）</p>
+<p>用户调用读写函数大多都是在I&#x2F;O缓冲区中读写，只有少数时候需要把读写请求传给内核</p>
+<ul>
+<li>第一次调用<code>fgetc</code>读一个字节时，<code>fgetc</code>函数可能通过系统调用进入内核读1K字节到I&#x2F;O缓冲区中，然后返回第一个字节给用户，把读写位置指向第二个字符</li>
+<li>以后用户再调用<code>fgetc</code>，就直接从I&#x2F;O缓冲区中读取</li>
+<li>当用户把这1K字节都读完之后，再次调用<code>fgetc</code>时，<code>fgetc</code>函数会再次进入内核读1K字节到I&#x2F;O缓冲区中</li>
+</ul>
+<p>用户程序调用<code>fputc</code>通常只是写到I&#x2F;O缓冲区中</p>
+<ul>
+<li>如果I&#x2F;O缓冲区写满了，就会把I&#x2F;O缓冲区的数据传给内核，内核最终把数据写回磁盘。</li>
+<li>如果希望立即把I&#x2F;O缓冲区的数据传给内核，让内核写回设备，就要进行Flush操作，对应的库函数是<code>fflush</code>，<code>fclose</code>函数在关闭文件前也会做Flush操作。</li>
+</ul>
+<p>C标准库的I&#x2F;O缓冲区有三种类型：全缓冲、行缓冲和无缓冲。当用户程序调用库函数做写操作时，不同类型的缓冲区具有不同的特性。</p>
+<ul>
+<li><strong>全缓冲：</strong>如果缓冲区写满了就写回内核。常规文件通常是全缓冲的。</li>
+<li><strong>行缓冲：</strong> 如果用户程序写的数据中有换行符就把这一行写回内核，或者如果缓冲区写满了就写回内核。标准输入和标准输出对应终端设备时通常是行缓冲的。</li>
+<li><strong>无缓冲：</strong>用户程序每次调库函数做写操作都要通过系统调用写回内核。标准错误输出通常是无缓冲的，这样用户程序产生的错误信息可以尽快输出到设备。</li>
+</ul>
 <h2 id="一些奇奇怪怪的方法"><a href="#一些奇奇怪怪的方法" class="headerlink" title="一些奇奇怪怪的方法"></a>一些奇奇怪怪的方法</h2><h3 id="1-typedef-分析复杂声明"><a href="#1-typedef-分析复杂声明" class="headerlink" title="1. typedef 分析复杂声明"></a>1. typedef 分析复杂声明</h3><p>在分析复杂声明时，要借助typedef把复杂声明分解成几种基本形式：</p>
 <ul>
 <li><p>T *p;，p是指向T类型的指针。</p>
