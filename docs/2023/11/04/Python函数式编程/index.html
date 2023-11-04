@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+
+    
+<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>Python函数式编程</title>
+<meta name="keywords" content="Python函数式编程, HzRr&#39;s Blog">
+<meta name="description" content="Python函数式编程一、函数式编程概述函数式编程通过在函数中定义表达式和对表达式求值完成计算。它尽量避免由于状态变化和使用可变对象引入复杂性，让程序变得简洁明了。
+Python 包含大量函数式编程特征，但它不是纯粹的函数式编程语言。它不仅">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="Python函数式编程">
+<meta property="og:description" content="Python函数式编程一、函数式编程概述函数式编程通过在函数中定义表达式和对表达式求值完成计算。它尽量避免由于状态变化和使用可变对象引入复杂性，让程序变得简洁明了。
+Python 包含大量函数式编程特征，但它不是纯粹的函数式编程语言。它不仅">
+
+<link rel="shortcut icon" href="/null">
+<link rel="stylesheet" href="/style/main.css">
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://example.com">
+        <img class="avatar" src="/images/avatar.svg" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="http://example.com">
+        <h1 class="site-title">HzRr&#39;s Blog</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/archives" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">Python函数式编程</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2023-11-04</span>
+        
+          <span>
+          <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="/tags/python/">
+              python
+                
+                  ，
+                
+              </a>
+            
+              <a href="/tags/functional-programming/">
+              functional programming
+                
+              </a>
+            
+          </span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <h1 id="Python函数式编程"><a href="#Python函数式编程" class="headerlink" title="Python函数式编程"></a>Python函数式编程</h1><h2 id="一、函数式编程概述"><a href="#一、函数式编程概述" class="headerlink" title="一、函数式编程概述"></a>一、函数式编程概述</h2><p>函数式编程通过在函数中定义表达式和对表达式求值完成计算。它尽量避免由于状态变化和使用可变对象引入复杂性，让程序变得简洁明了。</p>
+<p>Python 包含大量函数式编程特征，但它不是纯粹的函数式编程语言。它不仅具备函数式编程的诸多优势，还保留了命令式编程的强大优化能力。</p>
+<h3 id="1-1-编程范式"><a href="#1-1-编程范式" class="headerlink" title="1.1 编程范式"></a>1.1 编程范式</h3><p>编程范式没有统一划分标准，主要有两个范式：</p>
+<ul>
+<li><p><strong>命令式编程:</strong> 在命令式语言(如Python)中，计算的状态是通过不同命名空间中变量的值反映的。变量的值决定计算的当前状态，一条语句通过增加或改变（甚至是删除）变量来改变当前状态。<strong>“命令式”语言的每一条语句都是一个通过某种方式改变状态的命令</strong>。</p>
+<p>命令式编程可以再细分为多个子类别，主要的两个类别：</p>
+<ul>
+<li>过程式编程 </li>
+<li>面向对象编程</li>
+</ul>
+</li>
+<li><p><strong>函数式编程:</strong> 在函数式语言中，使用<code>对函数求值</code>这一更简单的概念代替<code>改变变量值的状态</code>，每次对函数求值都会在现有对象的基础上创建一个或多个新对象。</p>
+<p><strong>函数式程序即函数的组合</strong>，相应的开发过程是：</p>
+<ul>
+<li><p>首先设计一组易于理解的底层函数。</p>
+</li>
+<li><p>在此基础上设计符合业务需求的高级函数。</p>
+<blockquote>
+<p>相比于由复杂的流程控制组成的指令集合，高级函数更容易可视化。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-2-细分过程范式"><a href="#1-2-细分过程范式" class="headerlink" title="1.2 细分过程范式"></a>1.2 细分过程范式</h3><p>要写一个程序来求3或5的倍数的总和</p>
+<h4 id="1-2-1-使用函数式范式"><a href="#1-2-1-使用函数式范式" class="headerlink" title="1.2.1 使用函数式范式"></a>1.2.1 使用函数式范式</h4><p>在函数式编程中，求3或5的倍数的和可分为两部分：</p>
+<ul>
+<li>对一系列数值求和</li>
+<li>生成一个满足某个条件的序列(3或5的倍数组成的序列)</li>
+</ul>
+
+        </div>
+          
+        <div class="top-div">
+          <ol class="top-box"><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#Python%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B"><span class="top-box-text">Python函数式编程</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E4%B8%80%E3%80%81%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E6%A6%82%E8%BF%B0"><span class="top-box-text">一、函数式编程概述</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#1-1-%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F"><span class="top-box-text">1.1 编程范式</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#1-2-%E7%BB%86%E5%88%86%E8%BF%87%E7%A8%8B%E8%8C%83%E5%BC%8F"><span class="top-box-text">1.2 细分过程范式</span></a></li></ol></li></ol></li></ol>
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2023/11/02/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/">
+          <h3 class="post-title">
+            下一篇：体系结构
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/hzrr" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+
