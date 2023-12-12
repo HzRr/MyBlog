@@ -551,7 +551,7 @@ C语言学习笔记数据类型整型C语言中的char型是否为无符号数�
 <h2 id="GNU-C编译器扩展"><a href="#GNU-C编译器扩展" class="headerlink" title="GNU C编译器扩展"></a>GNU C编译器扩展</h2><h3 id="1-typeof扩展"><a href="#1-typeof扩展" class="headerlink" title="1. typeof扩展"></a>1. typeof扩展</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">typeof(x) y;</span><br><span class="line">typeof(x) x_ = x;</span><br></pre></td></tr></table></figure>
 
 <p><code>typeof</code> 是GCC的一个扩展，用于在C和C++代码中获取表达式的类型。尽管它不是C或C++标准的一部分，但它在GCC中非常有用，可以帮助你编写更加灵活和类型安全的代码。</p>
-<h3 id="2-语句表达式-…"><a href="#2-语句表达式-…" class="headerlink" title="2. 语句表达式 ({…})"></a>2. 语句表达式 ({…})</h3><p>语句表达式可以创建包含多个语句的匿名块，并从中返回一个值（更好用的lambda？）</p>
+<h3 id="2-语句表达式-…"><a href="#2-语句表达式-…" class="headerlink" title="2. 语句表达式 ({…})"></a>2. 语句表达式 ({…})</h3><p>语句表达式可以创建包含多个语句的匿名块，并从中返回一个值。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(&#123;</span><br><span class="line">    <span class="comment">// 包含多个语句的块</span></span><br><span class="line">    statement1;</span><br><span class="line">    statement2;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    last_statement; <span class="comment">// 这个语句的结果将作为整个表达式的值</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
 

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+
+    
+<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>CSAPP_Labs</title>
+<meta name="keywords" content="CSAPP_Labs, HzRr&#39;s Blog">
+<meta name="description" content="Data LabProblem 1Code:
+12345678910/*  * bitAnd - x&amp;y using only ~ and |  *   Example: bitAnd(6, 5) = 4 *   Legal ops">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="CSAPP_Labs">
+<meta property="og:description" content="Data LabProblem 1Code:
+12345678910/*  * bitAnd - x&amp;y using only ~ and |  *   Example: bitAnd(6, 5) = 4 *   Legal ops">
+
+<link rel="shortcut icon" href="/null">
+<link rel="stylesheet" href="/style/main.css">
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://example.com">
+        <img class="avatar" src="/images/avatar.svg" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="http://example.com">
+        <h1 class="site-title">HzRr&#39;s Blog</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/archives" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">CSAPP_Labs</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2023-12-11</span>
+        
+          <span>
+          <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="/tags/csapp/">
+              csapp
+                
+                  ，
+                
+              </a>
+            
+              <a href="/tags/labs/">
+              labs
+                
+              </a>
+            
+          </span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <h1 id="Data-Lab"><a href="#Data-Lab" class="headerlink" title="Data Lab"></a>Data Lab</h1><h2 id="Problem-1"><a href="#Problem-1" class="headerlink" title="Problem 1"></a>Problem 1</h2><p><strong>Code</strong>:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * bitAnd - x&amp;y using only ~ and | </span></span><br><span class="line"><span class="comment"> *   Example: bitAnd(6, 5) = 4</span></span><br><span class="line"><span class="comment"> *   Legal ops: ~ |</span></span><br><span class="line"><span class="comment"> *   Max ops: 8</span></span><br><span class="line"><span class="comment"> *   Rating: 1</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">bitAnd</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> ~((~x) | (~y));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Explaination:</strong></p>
+<p>x &amp; y 即 <del>(</del>x | ~y)</p>
+<h2 id="Problem-2"><a href="#Problem-2" class="headerlink" title="Problem 2"></a>Problem 2</h2><p><strong>Code:</strong> </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * getByte - Extract byte n from word x</span></span><br><span class="line"><span class="comment"> *   Bytes numbered from 0 (LSB) to 3 (MSB)</span></span><br><span class="line"><span class="comment"> *   Examples: getByte(0x12345678,1) = 0x56</span></span><br><span class="line"><span class="comment"> *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment"> *   Max ops: 6</span></span><br><span class="line"><span class="comment"> *   Rating: 2</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">getByte</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> n)</span> &#123;</span><br><span class="line">        <span class="type">int</span> shift_bits = n &lt;&lt; <span class="number">3</span>;</span><br><span class="line">        <span class="type">int</span> mask = <span class="number">0xff</span> &lt;&lt; shift_bits;</span><br><span class="line">        <span class="keyword">return</span> ((x &amp; mask) &gt;&gt; shift_bits) &amp; <span class="number">0xff</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Explaination:</strong><br>利用掩码获取指定字节的值，注意C的右移运算符<code>&gt;&gt;</code>是算术右移，若x为负数，在成功获取到对应字节值后仍需要与<code>0xff</code>进行一次按位与操作，以消除高位的1. </p>
+<h2 id="Problem-3"><a href="#Problem-3" class="headerlink" title="Problem 3"></a>Problem 3</h2><p><strong>Code:</strong> </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * logicalShift - shift x to the right by n, using a logical shift</span></span><br><span class="line"><span class="comment"> *   Can assume that 0 &lt;= n &lt;= 31</span></span><br><span class="line"><span class="comment"> *   Examples: logicalShift(0x87654321,4) = 0x08765432</span></span><br><span class="line"><span class="comment"> *   Legal ops: ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment"> *   Max ops: 20</span></span><br><span class="line"><span class="comment"> *   Rating: 3 </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">logicalShift</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> n)</span> &#123;</span><br><span class="line">        <span class="type">int</span> sign_num = (<span class="number">0x1</span> &lt;&lt; <span class="number">31</span>) &amp; x;</span><br><span class="line">        <span class="keyword">return</span> (x &gt;&gt; n) ^ ((sign_num &gt;&gt; n) &lt;&lt; <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Explaination:</strong><br>要实现逻辑右移，首先得获取符号位，通过<code>(0x1 &lt;&lt; 31) &amp; x</code>获取到x的符号位后，对x进行算术右移(<code>x &gt;&gt; n</code>)，并将结果与高n位填充为符号位(<code>((sign_num &gt;&gt; n) &lt;&lt; 1)</code>)进行按位与运算即可得到逻辑右移的结果。</p>
+<h2 id="Problem-4"><a href="#Problem-4" class="headerlink" title="Problem 4"></a>Problem 4</h2><p><strong>Code:</strong> </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * bitCount - returns count of number of 1&#x27;s in word</span></span><br><span class="line"><span class="comment"> *   Examples: bitCount(5) = 2, bitCount(7) = 3</span></span><br><span class="line"><span class="comment"> *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment"> *   Max ops: 40</span></span><br><span class="line"><span class="comment"> *   Rating: 4</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">bitCount</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">        <span class="type">int</span> mask1 = (<span class="number">0x55</span> &lt;&lt; <span class="number">24</span>) | (<span class="number">0x55</span> &lt;&lt; <span class="number">16</span>) | (<span class="number">0x55</span> &lt;&lt; <span class="number">8</span>) | <span class="number">0x55</span>;</span><br><span class="line">        <span class="type">int</span> mask2 = (<span class="number">0x33</span> &lt;&lt; <span class="number">24</span>) | (<span class="number">0x33</span> &lt;&lt; <span class="number">16</span>) | (<span class="number">0x33</span> &lt;&lt; <span class="number">8</span>) | <span class="number">0x33</span>;</span><br><span class="line">        <span class="type">int</span> mask3 = (<span class="number">0x0F</span> &lt;&lt; <span class="number">24</span>) | (<span class="number">0x0F</span> &lt;&lt; <span class="number">16</span>) | (<span class="number">0x0F</span> &lt;&lt; <span class="number">8</span>) | <span class="number">0x0F</span>;</span><br><span class="line">        <span class="type">int</span> mask4 = (<span class="number">0xFF</span> &lt;&lt; <span class="number">16</span>) | <span class="number">0xFF</span>;</span><br><span class="line">        <span class="type">int</span> mask5 = (<span class="number">0xFF</span> &lt;&lt; <span class="number">8</span> ) | <span class="number">0xFF</span>;</span><br><span class="line">        </span><br><span class="line">        x = (x &amp; mask1) + ((x &gt;&gt; <span class="number">1</span> ) &amp; mask1);</span><br><span class="line">        x = (x &amp; mask2) + ((x &gt;&gt; <span class="number">2</span> ) &amp; mask2);</span><br><span class="line">        x = (x &amp; mask3) + ((x &gt;&gt; <span class="number">4</span> ) &amp; mask3);</span><br><span class="line">        x = (x &amp; mask4) + ((x &gt;&gt; <span class="number">8</span> ) &amp; mask4);</span><br><span class="line">        x = (x &amp; mask5) + ((x &gt;&gt; <span class="number">16</span>) &amp; mask5);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Explaination:</strong> </p>
+<table>
+<thead>
+<tr>
+<th>十六进制</th>
+<th>二进制</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0x55555555</td>
+<td>01010101010101010101010101010101</td>
+</tr>
+<tr>
+<td>0x33333333</td>
+<td>00110011001100110011001100110011</td>
+</tr>
+<tr>
+<td>0x0F0F0F0F</td>
+<td>00001111000011110000111100001111</td>
+</tr>
+<tr>
+<td>0x00FF00FF</td>
+<td>00000000111111110000000011111111</td>
+</tr>
+<tr>
+<td>0x0000FFFF</td>
+<td>00000000000000001111111111111111</td>
+</tr>
+</tbody></table>
+<p>在统计每个x的二进制位有多少个1时，使用了上述五个掩码(mask), 这五个掩码的二进制值是按照 ** 01 -&gt; 0011 -&gt; 00001111 -&gt; 0000000011111111 -&gt; 00000000000000001111111111111111** 的规律变化的，而偏移量(shift)的值也与1的数目相关 <strong>1 -&gt; 2 -&gt; 4 -&gt; 8 -&gt; 16</strong></p>
+<p>而根据表达式 x &#x3D; (x &amp; mask[i])+ ((x &gt;&gt; shift) &amp; mask[i]); 可以看出： 第一次是计算每两位的和并储存在两个bit内, 第二次是计算每四位的和并储存在4个bit内……以此类推，最后计算每32位(即x)的和并储存在32个bit内(即x所在内存块)，由于是二进制表示，32位的和就是1的个数。</p>
+<h2 id="Problem-5"><a href="#Problem-5" class="headerlink" title="Problem 5"></a>Problem 5</h2><p><strong>Code:</strong> </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * bang - Compute !x without using !</span></span><br><span class="line"><span class="comment"> *   Examples: bang(3) = 0, bang(0) = 1</span></span><br><span class="line"><span class="comment"> *   Legal ops: ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment"> *   Max ops: 12</span></span><br><span class="line"><span class="comment"> *   Rating: 4 </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">bang</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">        x = (x &gt;&gt; <span class="number">16</span>) | x;</span><br><span class="line">        x = (x &gt;&gt; <span class="number">8</span> ) | x;</span><br><span class="line">        x = (x &gt;&gt; <span class="number">4</span> ) | x;</span><br><span class="line">        x = (x &gt;&gt; <span class="number">2</span> ) | x;</span><br><span class="line">        x = (x &gt;&gt; <span class="number">1</span> ) | x;</span><br><span class="line">        <span class="keyword">return</span> (~x &amp; <span class="number">0x1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Explaination:</strong><br>若x为真，即其二进制形式中存在1,则经过五次<code>x = (x &gt;&gt; shift) | x</code>运算后，其最低位一定为1,反之为0,再通过<code>(~x &amp; 0x1)</code>拿到对应的相反的值。</p>
+<h2 id="Problem-6"><a href="#Problem-6" class="headerlink" title="Problem 6"></a>Problem 6</h2><p><strong>Code:</strong> </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * tmin - return minimum two&#x27;s complement integer </span></span><br><span class="line"><span class="comment"> *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; &gt;&gt;</span></span><br><span class="line"><span class="comment"> *   Max ops: 4</span></span><br><span class="line"><span class="comment"> *   Rating: 1</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">tmin</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0x1</span> &lt;&lt; <span class="number">31</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Explaination:</strong><br>32位有符号int型的最小值为0x80000000.</p>
+<h2 id="Problem-7"><a href="#Problem-7" class="headerlink" title="Problem 7"></a>Problem 7</h2><p><strong>Code:</strong> </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line"></span><br><span class="line">**Explaination:** </span><br><span class="line"></span><br><span class="line">## Problem <span class="number">8</span></span><br><span class="line"></span><br><span class="line">**Code:** </span><br><span class="line">```C</span><br></pre></td></tr></table></figure>
+
+<p><strong>Explaination:</strong> </p>
+<h2 id="Problem-9"><a href="#Problem-9" class="headerlink" title="Problem 9"></a>Problem 9</h2><p><strong>Code:</strong> </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line"></span><br><span class="line">**Explaination:** </span><br><span class="line"></span><br><span class="line">## Problem <span class="number">10</span></span><br><span class="line"></span><br><span class="line">**Code:** </span><br><span class="line">```C</span><br></pre></td></tr></table></figure>
+
+<p><strong>Explaination:</strong> </p>
+<h2 id="Problem-11"><a href="#Problem-11" class="headerlink" title="Problem 11"></a>Problem 11</h2><p><strong>Code:</strong> </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line"></span><br><span class="line">**Explaination:** </span><br><span class="line"></span><br><span class="line">## Problem <span class="number">12</span></span><br><span class="line"></span><br><span class="line">**Code:** </span><br><span class="line">```C</span><br></pre></td></tr></table></figure>
+
+<p><strong>Explaination:</strong> </p>
+<h2 id="Problem-13"><a href="#Problem-13" class="headerlink" title="Problem 13"></a>Problem 13</h2><p><strong>Code:</strong> </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line"></span><br><span class="line">**Explaination:** </span><br><span class="line"></span><br><span class="line">## Problem <span class="number">14</span></span><br><span class="line"></span><br><span class="line">**Code:** </span><br><span class="line">```C</span><br></pre></td></tr></table></figure>
+
+<p><strong>Explaination:</strong> </p>
+<h2 id="Problem-15"><a href="#Problem-15" class="headerlink" title="Problem 15"></a>Problem 15</h2><p><strong>Code:</strong> </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>Explaination:</strong> </p>
+
+        </div>
+          
+        <div class="top-div">
+          <ol class="top-box"><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#Data-Lab"><span class="top-box-text">Data Lab</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Problem-1"><span class="top-box-text">Problem 1</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Problem-2"><span class="top-box-text">Problem 2</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Problem-3"><span class="top-box-text">Problem 3</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Problem-4"><span class="top-box-text">Problem 4</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Problem-5"><span class="top-box-text">Problem 5</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Problem-6"><span class="top-box-text">Problem 6</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Problem-7"><span class="top-box-text">Problem 7</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Problem-9"><span class="top-box-text">Problem 9</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Problem-11"><span class="top-box-text">Problem 11</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Problem-13"><span class="top-box-text">Problem 13</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Problem-15"><span class="top-box-text">Problem 15</span></a></li></ol></li></ol>
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2023/11/30/CSAPP-Note/">
+          <h3 class="post-title">
+            下一篇：CSAPP_Note
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/hzrr" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+
