@@ -11,14 +11,20 @@
 
 <title>CPython学习笔记</title>
 <meta name="keywords" content="CPython学习笔记, HzRr&#39;s Blog">
-<meta name="description" content="111
-">
+<meta name="description" content="一、前言这里使用的是CPython分支v3.8.0b4
+参考资料：
+
+Your Guide to the CPython Source Code
+【python】带你入门cpython源代码，让你不再一头雾水！尝试去读读python的实现吧">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta property="og:title" content="CPython学习笔记">
-<meta property="og:description" content="111
-">
+<meta property="og:description" content="一、前言这里使用的是CPython分支v3.8.0b4
+参考资料：
+
+Your Guide to the CPython Source Code
+【python】带你入门cpython源代码，让你不再一头雾水！尝试去读读python的实现吧">
 
 <link rel="shortcut icon" href="/null">
 <link rel="stylesheet" href="/style/main.css">
@@ -102,12 +108,36 @@
       </div>
       <div class="post-content-wrapper">
         <div class="post-content">
-          <p>111</p>
+          <h1 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h1><p>这里使用的是CPython分支v3.8.0b4</p>
+<p>参考资料：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://realpython.com/cpython-source-code-guide/">Your Guide to the CPython Source Code</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1sS4y1g7hN">【python】带你入门cpython源代码，让你不再一头雾水！尝试去读读python的实现吧</a></li>
+</ul>
+<h1 id="二、Objects"><a href="#二、Objects" class="headerlink" title="二、Objects"></a>二、Objects</h1><h2 id="1-abstract"><a href="#1-abstract" class="headerlink" title="1. abstract"></a>1. abstract</h2><p>Python所有object的基础结构体PyObject,这个定义在<code>Include/object.h</code>内</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Nothing is actually declared to be a PyObject, but every pointer to</span></span><br><span class="line"><span class="comment"> * a Python object can be cast to a PyObject*.  This is inheritance built</span></span><br><span class="line"><span class="comment"> * by hand.  Similarly every pointer to a variable-size Python object can,</span></span><br><span class="line"><span class="comment"> * in addition, be cast to PyVarObject*.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">object</span> &#123;</span></span><br><span class="line">    _PyObject_HEAD_EXTRA</span><br><span class="line">    Py_ssize_t ob_refcnt;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> _<span class="title">typeobject</span> *<span class="title">ob_type</span>;</span></span><br><span class="line">&#125; PyObject;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>ob_refcnt</strong>: 是python object的引用计数，当object的引用计数为0是，python对象占用的内存就会被释放。</li>
+<li><strong>*ob_type</strong>: 指向_typeobject结构体的指针，这个指针指向描述对象类型的结构体。每个Python对象都会有一个与之关联的类型对象，它包含了对象的元数据，如其名称、基类和方法列表等。</li>
+</ul>
+<h2 id="2-listobject"><a href="#2-listobject" class="headerlink" title="2. listobject"></a>2. listobject</h2><p>python list object 的结构体，定义在<code>Include/listobject.h</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    PyObject_VAR_HEAD</span><br><span class="line">    <span class="comment">/* Vector of pointers to list elements.  list[0] is ob_item[0], etc. */</span></span><br><span class="line">    PyObject **ob_item;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* ob_item contains space for &#x27;allocated&#x27; elements.  The number</span></span><br><span class="line"><span class="comment">     * currently in use is ob_size.</span></span><br><span class="line"><span class="comment">     * Invariants:</span></span><br><span class="line"><span class="comment">     *     0 &lt;= ob_size &lt;= allocated</span></span><br><span class="line"><span class="comment">     *     len(list) == ob_size</span></span><br><span class="line"><span class="comment">     *     ob_item == NULL implies ob_size == allocated == 0</span></span><br><span class="line"><span class="comment">     * list.sort() temporarily sets allocated to -1 to detect mutations.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * Items must normally not be NULL, except during construction when</span></span><br><span class="line"><span class="comment">     * the list is not yet visible outside the function that builds it.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    Py_ssize_t allocated;</span><br><span class="line">&#125; PyListObject;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>ob_item</strong>: 是一个指向指针数组的指针。这个数组包含指向列表中每个元素的指针。例如，如果你有一个Python列表[a, b, c]，<code>ob_item</code>将是一个数组，其元素是指向a、b和c的指针。</p>
+</li>
+<li><p><strong>allocated</strong>: 字段表示为ob_item分配的内存中可以存储的元素的数量。这通常大于或等于<code>ob_size</code>，<code>ob_size</code>表示列表当前实际包含的元素的数量。这种设计允许列表预分配内存，从而在添加新元素时减少需要进行的内存重新分配的次数。</p>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> PyObject_VAR_HEAD      PyVarObject ob_base;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    PyObject ob_base;</span><br><span class="line">    Py_ssize_t ob_size; <span class="comment">/* Number of items in variable part */</span></span><br><span class="line">&#125; PyVarObject;</span><br></pre></td></tr></table></figure>
+
+<p>PyObject_VAR_HEAD宏被扩展后会得到一个名为<code>ob_base</code>的<code>PyVarObject</code>声明，这个PyVarObject结构体包含可变部分的对象数量<code>ob_size</code>。</p>
 
         </div>
           
         <div class="top-div">
-          
+          <ol class="top-box"><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#%E4%B8%80%E3%80%81%E5%89%8D%E8%A8%80"><span class="top-box-text">一、前言</span></a></li><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#%E4%BA%8C%E3%80%81Objects"><span class="top-box-text">二、Objects</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#1-abstract"><span class="top-box-text">1. abstract</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#2-listobject"><span class="top-box-text">2. listobject</span></a></li></ol></li></ol>
         </div>
           
       </div>
