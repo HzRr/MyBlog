@@ -1,158 +1,167 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
-    
-
-    
-<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
-    
-
-<meta charset="utf-8" >
-
-<title>CSAPP_Note</title>
-<meta name="keywords" content="CSAPP_Note, HzRr&#39;s Blog">
-<meta name="description" content="[TOC]
-第1章 计算机系统漫游…
-第2章 信息的表示和处理…
-第3章 程序的机器级表示1. 数据格式
-
-
-C声明
-Intel 数据类型
-汇编代码后缀
-大小（字节）
-
-
-
-char
-字节
-b
-1
-
-
-short
-字
-w
-2
-
-
-int
-双">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="[TOC] 第1章 计算机系统漫游… 第2章 信息的表示和处理… 第3章 程序的机器级表示1. 数据格式   C声明 Intel 数据类型 汇编代码后缀 大小（字节）    char 字节 b 1   short 字 w 2   int 双字 l 4   long 四字 q 8   char* 四字 q 8   float 单精度 s 4   double 双精度 l 8    由于是从16位体系">
+<meta property="og:type" content="article">
 <meta property="og:title" content="CSAPP_Note">
-<meta property="og:description" content="[TOC]
-第1章 计算机系统漫游…
-第2章 信息的表示和处理…
-第3章 程序的机器级表示1. 数据格式
-
-
-C声明
-Intel 数据类型
-汇编代码后缀
-大小（字节）
-
-
-
-char
-字节
-b
-1
-
-
-short
-字
-w
-2
-
-
-int
-双">
-
-<link rel="shortcut icon" href="/null">
-<link rel="stylesheet" href="/style/main.css">
-
-  <meta name="generator" content="Hexo 6.3.0"></head>
-  <body>
-    <div id="app" class="main">
-
-<div class="site-header-container">
-  <div class="site-header">
-    <div class="left">
-      <a href="http://www.hzrr.com">
-        <img class="avatar" src="/images/avatar.svg" alt="logo" width="32px" height="32px">
-      </a>
-      <a href="http://www.hzrr.com">
-        <h1 class="site-title">HzRr&#39;s Blog</h1>
-      </a>
-    </div>
-    <div class="right">
-        <i class="icon menu-switch icon-menu-outline" ></i>
-    </div>
-  </div>
-</div>
-
-<div class="menu-container" style="height: 0;opacity: 0;">
-<nav class="menu-list">
-  
+<meta property="og:url" content="http://www.hzrr.com/2023/11/30/CSAPP-Note/index.html">
+<meta property="og:site_name" content="HzRr&#39;s Blog">
+<meta property="og:description" content="[TOC] 第1章 计算机系统漫游… 第2章 信息的表示和处理… 第3章 程序的机器级表示1. 数据格式   C声明 Intel 数据类型 汇编代码后缀 大小（字节）    char 字节 b 1   short 字 w 2   int 双字 l 4   long 四字 q 8   char* 四字 q 8   float 单精度 s 4   double 双精度 l 8    由于是从16位体系">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-11-30T09:44:11.000Z">
+<meta property="article:modified_time" content="2024-01-01T04:51:53.912Z">
+<meta property="article:author" content="HzRr">
+<meta property="article:tag" content="Note">
+<meta property="article:tag" content="CSAPP">
+<meta name="twitter:card" content="summary">
     
-      <a href="/" class="menu purple-link">
-        首页
-      </a>
     
-  
-    
-      <a href="/tags" class="menu purple-link">
-        标签
-      </a>
-    
-  
-    
-      <a href="/archives" class="menu purple-link">
-        归档
-      </a>
-    
-  
-    
-      <a href="/about" class="menu purple-link">
-        关于
-      </a>
-    
-  
-</nav>
-</div>
-
-
-
-  <div class="content-container">
-    <div class="post-detail">
       
-      <h2 class="post-title">CSAPP_Note</h2>
-      <div class="post-info post-detail-info">
-        <span><i class="icon icon-calendar-outline"></i> 2023-11-30</span>
         
-          <span>
-          <i class="icon icon-pricetags-outline"></i>
-            
-              <a href="/tags/Note/">
-              Note
-                
-                  ，
-                
-              </a>
-            
-              <a href="/tags/CSAPP/">
-              CSAPP
-                
-              </a>
-            
-          </span>
+          <link rel="shortcut icon" href="/images/favicon.ico">
         
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>CSAPP_Note</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/hzrr">项目</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2023/12/11/CSAPP-Labs/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2023/11/22/C%E7%B1%BB%E5%9E%8B%E9%99%90%E5%AE%9A%E7%AC%A6/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://www.hzrr.com/2023/11/30/CSAPP-Note/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://www.hzrr.com/2023/11/30/CSAPP-Note/&text=CSAPP_Note"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://www.hzrr.com/2023/11/30/CSAPP-Note/&title=CSAPP_Note"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://www.hzrr.com/2023/11/30/CSAPP-Note/&is_video=false&description=CSAPP_Note"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CSAPP_Note&body=Check out this article: http://www.hzrr.com/2023/11/30/CSAPP-Note/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://www.hzrr.com/2023/11/30/CSAPP-Note/&title=CSAPP_Note"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://www.hzrr.com/2023/11/30/CSAPP-Note/&title=CSAPP_Note"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://www.hzrr.com/2023/11/30/CSAPP-Note/&title=CSAPP_Note"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://www.hzrr.com/2023/11/30/CSAPP-Note/&title=CSAPP_Note"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://www.hzrr.com/2023/11/30/CSAPP-Note/&name=CSAPP_Note&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://www.hzrr.com/2023/11/30/CSAPP-Note/&t=CSAPP_Note"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC1%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8"><span class="toc-number">1.</span> <span class="toc-text">第1章 计算机系统漫游</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC2%E7%AB%A0-%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">第2章 信息的表示和处理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC3%E7%AB%A0-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA"><span class="toc-number">3.</span> <span class="toc-text">第3章 程序的机器级表示</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F"><span class="toc-number">3.1.</span> <span class="toc-text">1. 数据格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%AE%BF%E9%97%AE%E4%BF%A1%E6%81%AF"><span class="toc-number">3.2.</span> <span class="toc-text">2. 访问信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8C%87%E7%A4%BA%E7%AC%A6"><span class="toc-number">3.3.</span> <span class="toc-text">3. 操作数指示符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%95%B0%E6%8D%AE%E7%9B%B8%E5%85%B3%E6%8C%87%E4%BB%A4"><span class="toc-number">3.4.</span> <span class="toc-text">4. 数据相关指令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E6%95%B0%E6%8D%AE%E4%BC%A0%E9%80%81%E6%8C%87%E4%BB%A4"><span class="toc-number">3.4.1.</span> <span class="toc-text">4.1. 数据传送指令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-1-MOV%E7%B1%BB"><span class="toc-number">3.4.1.1.</span> <span class="toc-text">4.1.1. MOV类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-2-MOVZ-MOVS%E7%B1%BB"><span class="toc-number">3.4.1.2.</span> <span class="toc-text">4.1.2 MOVZ&#x2F;MOVS类</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E5%8E%8B%E5%85%A5%E5%92%8C%E5%BC%B9%E5%87%BA%E6%A0%88%E6%95%B0%E6%8D%AE"><span class="toc-number">3.4.2.</span> <span class="toc-text">4.2. 压入和弹出栈数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E7%AE%97%E6%9C%AF%E5%92%8C%E9%80%BB%E8%BE%91%E6%93%8D%E4%BD%9C"><span class="toc-number">3.4.3.</span> <span class="toc-text">4.3. 算术和逻辑操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-%E7%89%B9%E6%AE%8A%E7%9A%84%E7%AE%97%E6%9C%AF%E6%93%8D%E4%BD%9C"><span class="toc-number">3.4.4.</span> <span class="toc-text">4.4. 特殊的算术操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E6%8E%A7%E5%88%B6%E7%9B%B8%E5%85%B3%E6%8C%87%E4%BB%A4"><span class="toc-number">3.5.</span> <span class="toc-text">5. 控制相关指令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E6%9D%A1%E4%BB%B6%E7%A0%81"><span class="toc-number">3.5.1.</span> <span class="toc-text">5.1. 条件码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E8%AE%BF%E9%97%AE%E6%9D%A1%E4%BB%B6%E7%A0%81"><span class="toc-number">3.5.2.</span> <span class="toc-text">5.2. 访问条件码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4"><span class="toc-number">3.5.3.</span> <span class="toc-text">5.3. 跳转指令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-3-1-jump%E6%8C%87%E4%BB%A4"><span class="toc-number">3.5.3.1.</span> <span class="toc-text">5.3.1. jump指令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-3-2-%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4%E7%9A%84%E7%BC%96%E7%A0%81"><span class="toc-number">3.5.3.2.</span> <span class="toc-text">5.3.2. 跳转指令的编码</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%B1%87%E7%BC%96%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.6.</span> <span class="toc-text">6. 控制语句的汇编实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E6%9D%A1%E4%BB%B6%E5%88%86%E6%94%AF"><span class="toc-number">3.6.1.</span> <span class="toc-text">6.1. 条件分支</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#6-1-1-%E7%94%A8%E6%9D%A1%E4%BB%B6%E6%8E%A7%E5%88%B6%E6%9D%A5%E5%AE%9E%E7%8E%B0%E6%9D%A1%E4%BB%B6%E5%88%86%E6%94%AF"><span class="toc-number">3.6.1.1.</span> <span class="toc-text">6.1.1. 用条件控制来实现条件分支</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-1-2-%E7%94%A8%E6%9D%A1%E4%BB%B6%E4%BC%A0%E9%80%81%E6%9D%A5%E5%AE%9E%E7%8E%B0%E6%9D%A1%E4%BB%B6%E5%88%86%E6%94%AF"><span class="toc-number">3.6.1.2.</span> <span class="toc-text">6.1.2. 用条件传送来实现条件分支</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5"><span class="toc-number">3.6.2.</span> <span class="toc-text">6.2. 循环语句</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#6-2-1-do-while%E5%BE%AA%E7%8E%AF"><span class="toc-number">3.6.2.1.</span> <span class="toc-text">6.2.1. do-while循环</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-2-2-while%E5%BE%AA%E7%8E%AF"><span class="toc-number">3.6.2.2.</span> <span class="toc-text">6.2.2. while循环</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-2-3-for%E5%BE%AA%E7%8E%AF"><span class="toc-number">3.6.2.3.</span> <span class="toc-text">6.2.3. for循环</span></a></li></ol></li></ol></li></ol></li></ol>
       </div>
-      <div class="post-content-wrapper">
-        <div class="post-content">
-          <p>[TOC]</p>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        CSAPP_Note
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">HzRr</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-11-30T09:44:11.000Z" class="dt-published" itemprop="datePublished">2023-11-30</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/CSAPP/" rel="tag">CSAPP</a>, <a class="p-category" href="/tags/Note/" rel="tag">Note</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>[TOC]</p>
 <h1 id="第1章-计算机系统漫游"><a href="#第1章-计算机系统漫游" class="headerlink" title="第1章 计算机系统漫游"></a>第1章 计算机系统漫游</h1><p>…</p>
 <h1 id="第2章-信息的表示和处理"><a href="#第2章-信息的表示和处理" class="headerlink" title="第2章 信息的表示和处理"></a>第2章 信息的表示和处理</h1><p>…</p>
 <h1 id="第3章-程序的机器级表示"><a href="#第3章-程序的机器级表示" class="headerlink" title="第3章 程序的机器级表示"></a>第3章 程序的机器级表示</h1><h2 id="1-数据格式"><a href="#1-数据格式" class="headerlink" title="1. 数据格式"></a>1. 数据格式</h2><table>
@@ -1085,78 +1094,143 @@ int
 
 
 
-        </div>
-          
-        <div class="top-div">
-          <ol class="top-box"><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#%E7%AC%AC1%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8"><span class="top-box-text">第1章 计算机系统漫游</span></a></li><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#%E7%AC%AC2%E7%AB%A0-%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86"><span class="top-box-text">第2章 信息的表示和处理</span></a></li><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#%E7%AC%AC3%E7%AB%A0-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA"><span class="top-box-text">第3章 程序的机器级表示</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#1-%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F"><span class="top-box-text">1. 数据格式</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#2-%E8%AE%BF%E9%97%AE%E4%BF%A1%E6%81%AF"><span class="top-box-text">2. 访问信息</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#3-%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8C%87%E7%A4%BA%E7%AC%A6"><span class="top-box-text">3. 操作数指示符</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#4-%E6%95%B0%E6%8D%AE%E7%9B%B8%E5%85%B3%E6%8C%87%E4%BB%A4"><span class="top-box-text">4. 数据相关指令</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#4-1-%E6%95%B0%E6%8D%AE%E4%BC%A0%E9%80%81%E6%8C%87%E4%BB%A4"><span class="top-box-text">4.1. 数据传送指令</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#4-2-%E5%8E%8B%E5%85%A5%E5%92%8C%E5%BC%B9%E5%87%BA%E6%A0%88%E6%95%B0%E6%8D%AE"><span class="top-box-text">4.2. 压入和弹出栈数据</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#4-3-%E7%AE%97%E6%9C%AF%E5%92%8C%E9%80%BB%E8%BE%91%E6%93%8D%E4%BD%9C"><span class="top-box-text">4.3. 算术和逻辑操作</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#4-4-%E7%89%B9%E6%AE%8A%E7%9A%84%E7%AE%97%E6%9C%AF%E6%93%8D%E4%BD%9C"><span class="top-box-text">4.4. 特殊的算术操作</span></a></li></ol></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#5-%E6%8E%A7%E5%88%B6%E7%9B%B8%E5%85%B3%E6%8C%87%E4%BB%A4"><span class="top-box-text">5. 控制相关指令</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#5-1-%E6%9D%A1%E4%BB%B6%E7%A0%81"><span class="top-box-text">5.1. 条件码</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#5-2-%E8%AE%BF%E9%97%AE%E6%9D%A1%E4%BB%B6%E7%A0%81"><span class="top-box-text">5.2. 访问条件码</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#5-3-%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4"><span class="top-box-text">5.3. 跳转指令</span></a></li></ol></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#6-%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%B1%87%E7%BC%96%E5%AE%9E%E7%8E%B0"><span class="top-box-text">6. 控制语句的汇编实现</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#6-1-%E6%9D%A1%E4%BB%B6%E5%88%86%E6%94%AF"><span class="top-box-text">6.1. 条件分支</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#6-2-%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5"><span class="top-box-text">6.2. 循环语句</span></a></li></ol></li></ol></li></ol>
-        </div>
-          
-      </div>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+          <li><a href="/archives/">归档</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/hzrr">项目</a></li>
+        
+      </ul>
     </div>
 
     
-      <div class="next-post">
-        <a class="purple-link" href="/2023/11/22/C%E7%B1%BB%E5%9E%8B%E9%99%90%E5%AE%9A%E7%AC%A6/">
-          <h3 class="post-title">
-            下一篇：C类型限定符
-          </h3>
-        </a>
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC1%E7%AB%A0-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8"><span class="toc-number">1.</span> <span class="toc-text">第1章 计算机系统漫游</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC2%E7%AB%A0-%E4%BF%A1%E6%81%AF%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%A4%84%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">第2章 信息的表示和处理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC3%E7%AB%A0-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA"><span class="toc-number">3.</span> <span class="toc-text">第3章 程序的机器级表示</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F"><span class="toc-number">3.1.</span> <span class="toc-text">1. 数据格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%AE%BF%E9%97%AE%E4%BF%A1%E6%81%AF"><span class="toc-number">3.2.</span> <span class="toc-text">2. 访问信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8C%87%E7%A4%BA%E7%AC%A6"><span class="toc-number">3.3.</span> <span class="toc-text">3. 操作数指示符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%95%B0%E6%8D%AE%E7%9B%B8%E5%85%B3%E6%8C%87%E4%BB%A4"><span class="toc-number">3.4.</span> <span class="toc-text">4. 数据相关指令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E6%95%B0%E6%8D%AE%E4%BC%A0%E9%80%81%E6%8C%87%E4%BB%A4"><span class="toc-number">3.4.1.</span> <span class="toc-text">4.1. 数据传送指令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-1-MOV%E7%B1%BB"><span class="toc-number">3.4.1.1.</span> <span class="toc-text">4.1.1. MOV类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-2-MOVZ-MOVS%E7%B1%BB"><span class="toc-number">3.4.1.2.</span> <span class="toc-text">4.1.2 MOVZ&#x2F;MOVS类</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E5%8E%8B%E5%85%A5%E5%92%8C%E5%BC%B9%E5%87%BA%E6%A0%88%E6%95%B0%E6%8D%AE"><span class="toc-number">3.4.2.</span> <span class="toc-text">4.2. 压入和弹出栈数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E7%AE%97%E6%9C%AF%E5%92%8C%E9%80%BB%E8%BE%91%E6%93%8D%E4%BD%9C"><span class="toc-number">3.4.3.</span> <span class="toc-text">4.3. 算术和逻辑操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-%E7%89%B9%E6%AE%8A%E7%9A%84%E7%AE%97%E6%9C%AF%E6%93%8D%E4%BD%9C"><span class="toc-number">3.4.4.</span> <span class="toc-text">4.4. 特殊的算术操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E6%8E%A7%E5%88%B6%E7%9B%B8%E5%85%B3%E6%8C%87%E4%BB%A4"><span class="toc-number">3.5.</span> <span class="toc-text">5. 控制相关指令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E6%9D%A1%E4%BB%B6%E7%A0%81"><span class="toc-number">3.5.1.</span> <span class="toc-text">5.1. 条件码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E8%AE%BF%E9%97%AE%E6%9D%A1%E4%BB%B6%E7%A0%81"><span class="toc-number">3.5.2.</span> <span class="toc-text">5.2. 访问条件码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4"><span class="toc-number">3.5.3.</span> <span class="toc-text">5.3. 跳转指令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-3-1-jump%E6%8C%87%E4%BB%A4"><span class="toc-number">3.5.3.1.</span> <span class="toc-text">5.3.1. jump指令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-3-2-%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4%E7%9A%84%E7%BC%96%E7%A0%81"><span class="toc-number">3.5.3.2.</span> <span class="toc-text">5.3.2. 跳转指令的编码</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%B1%87%E7%BC%96%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.6.</span> <span class="toc-text">6. 控制语句的汇编实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E6%9D%A1%E4%BB%B6%E5%88%86%E6%94%AF"><span class="toc-number">3.6.1.</span> <span class="toc-text">6.1. 条件分支</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#6-1-1-%E7%94%A8%E6%9D%A1%E4%BB%B6%E6%8E%A7%E5%88%B6%E6%9D%A5%E5%AE%9E%E7%8E%B0%E6%9D%A1%E4%BB%B6%E5%88%86%E6%94%AF"><span class="toc-number">3.6.1.1.</span> <span class="toc-text">6.1.1. 用条件控制来实现条件分支</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-1-2-%E7%94%A8%E6%9D%A1%E4%BB%B6%E4%BC%A0%E9%80%81%E6%9D%A5%E5%AE%9E%E7%8E%B0%E6%9D%A1%E4%BB%B6%E5%88%86%E6%94%AF"><span class="toc-number">3.6.1.2.</span> <span class="toc-text">6.1.2. 用条件传送来实现条件分支</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5"><span class="toc-number">3.6.2.</span> <span class="toc-text">6.2. 循环语句</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#6-2-1-do-while%E5%BE%AA%E7%8E%AF"><span class="toc-number">3.6.2.1.</span> <span class="toc-text">6.2.1. do-while循环</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-2-2-while%E5%BE%AA%E7%8E%AF"><span class="toc-number">3.6.2.2.</span> <span class="toc-text">6.2.2. while循环</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-2-3-for%E5%BE%AA%E7%8E%AF"><span class="toc-number">3.6.2.3.</span> <span class="toc-text">6.2.3. for循环</span></a></li></ol></li></ol></li></ol></li></ol>
       </div>
     
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://www.hzrr.com/2023/11/30/CSAPP-Note/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://www.hzrr.com/2023/11/30/CSAPP-Note/&text=CSAPP_Note"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://www.hzrr.com/2023/11/30/CSAPP-Note/&title=CSAPP_Note"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://www.hzrr.com/2023/11/30/CSAPP-Note/&is_video=false&description=CSAPP_Note"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CSAPP_Note&body=Check out this article: http://www.hzrr.com/2023/11/30/CSAPP-Note/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://www.hzrr.com/2023/11/30/CSAPP-Note/&title=CSAPP_Note"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://www.hzrr.com/2023/11/30/CSAPP-Note/&title=CSAPP_Note"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://www.hzrr.com/2023/11/30/CSAPP-Note/&title=CSAPP_Note"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://www.hzrr.com/2023/11/30/CSAPP-Note/&title=CSAPP_Note"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://www.hzrr.com/2023/11/30/CSAPP-Note/&name=CSAPP_Note&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://www.hzrr.com/2023/11/30/CSAPP-Note/&t=CSAPP_Note"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
   </div>
-
-
-
-
-
-
-
-
-
-
-<footer>
-<div class="site-footer">
-  <div class="social-container">
-    
-      
-        <a aria-label="跳转至github" href="https://github.com/hzrr" target="_blank">
-          <i class="icon icon-github"></i>
-        </a>
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  </div>
-  
-    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
-  
-  
-  
-  
-  
-  
 </div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023-2024
+    HzRr
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/hzrr">项目</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
 </footer>
 
-
-      </div>
     </div>
-    
-<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
 
 <script src="/js/main.js"></script>
 
+<!-- search -->
 
+<!-- Baidu Analytics -->
 
+<!-- Cloudflare Analytics -->
 
+<!-- Disqus Comments -->
 
+<!-- utterances Comments -->
 
-  </body>
+</body>
 </html>
-

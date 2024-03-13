@@ -1,108 +1,167 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
-    
-
-    
-<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
-    
-
-<meta charset="utf-8" >
-
-<title>Python函数式编程</title>
-<meta name="keywords" content="Python函数式编程, HzRr&#39;s Blog">
-<meta name="description" content="Python函数式编程一、函数式编程概述函数式编程通过在函数中定义表达式和对表达式求值完成计算。它尽量避免由于状态变化和使用可变对象引入复杂性，让程序变得简洁明了。
-Python 包含大量函数式编程特征，但它不是纯粹的函数式编程语言。它不仅">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Python函数式编程一、函数式编程概述函数式编程通过在函数中定义表达式和对表达式求值完成计算。它尽量避免由于状态变化和使用可变对象引入复杂性，让程序变得简洁明了。 Python 包含大量函数式编程特征，但它不是纯粹的函数式编程语言。它不仅具备函数式编程的诸多优势，还保留了命令式编程的强大优化能力。 1.1 编程范式编程范式没有统一划分标准，主要有两个范式：  命令式编程: 在命令式语言(如Pyt">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Python函数式编程">
-<meta property="og:description" content="Python函数式编程一、函数式编程概述函数式编程通过在函数中定义表达式和对表达式求值完成计算。它尽量避免由于状态变化和使用可变对象引入复杂性，让程序变得简洁明了。
-Python 包含大量函数式编程特征，但它不是纯粹的函数式编程语言。它不仅">
-
-<link rel="shortcut icon" href="/null">
-<link rel="stylesheet" href="/style/main.css">
-
-  <meta name="generator" content="Hexo 6.3.0"></head>
-  <body>
-    <div id="app" class="main">
-
-<div class="site-header-container">
-  <div class="site-header">
-    <div class="left">
-      <a href="http://www.hzrr.com">
-        <img class="avatar" src="/images/avatar.svg" alt="logo" width="32px" height="32px">
-      </a>
-      <a href="http://www.hzrr.com">
-        <h1 class="site-title">HzRr&#39;s Blog</h1>
-      </a>
-    </div>
-    <div class="right">
-        <i class="icon menu-switch icon-menu-outline" ></i>
-    </div>
-  </div>
-</div>
-
-<div class="menu-container" style="height: 0;opacity: 0;">
-<nav class="menu-list">
-  
+<meta property="og:url" content="http://www.hzrr.com/2023/11/04/Python%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/index.html">
+<meta property="og:site_name" content="HzRr&#39;s Blog">
+<meta property="og:description" content="Python函数式编程一、函数式编程概述函数式编程通过在函数中定义表达式和对表达式求值完成计算。它尽量避免由于状态变化和使用可变对象引入复杂性，让程序变得简洁明了。 Python 包含大量函数式编程特征，但它不是纯粹的函数式编程语言。它不仅具备函数式编程的诸多优势，还保留了命令式编程的强大优化能力。 1.1 编程范式编程范式没有统一划分标准，主要有两个范式：  命令式编程: 在命令式语言(如Pyt">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-11-04T08:17:50.000Z">
+<meta property="article:modified_time" content="2023-11-04T13:15:48.380Z">
+<meta property="article:author" content="HzRr">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="functional programming">
+<meta name="twitter:card" content="summary">
     
-      <a href="/" class="menu purple-link">
-        首页
-      </a>
     
-  
-    
-      <a href="/tags" class="menu purple-link">
-        标签
-      </a>
-    
-  
-    
-      <a href="/archives" class="menu purple-link">
-        归档
-      </a>
-    
-  
-    
-      <a href="/about" class="menu purple-link">
-        关于
-      </a>
-    
-  
-</nav>
-</div>
-
-
-
-  <div class="content-container">
-    <div class="post-detail">
       
-      <h2 class="post-title">Python函数式编程</h2>
-      <div class="post-info post-detail-info">
-        <span><i class="icon icon-calendar-outline"></i> 2023-11-04</span>
         
-          <span>
-          <i class="icon icon-pricetags-outline"></i>
-            
-              <a href="/tags/python/">
-              python
-                
-                  ，
-                
-              </a>
-            
-              <a href="/tags/functional-programming/">
-              functional programming
-                
-              </a>
-            
-          </span>
+          <link rel="shortcut icon" href="/images/favicon.ico">
         
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Python函数式编程</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/hzrr">项目</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2023/11/18/C%E8%AF%AD%E8%A8%80%E6%A0%87%E5%87%86%E5%BA%93%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2023/11/02/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://www.hzrr.com/2023/11/04/Python%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://www.hzrr.com/2023/11/04/Python%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/&text=Python函数式编程"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://www.hzrr.com/2023/11/04/Python%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/&title=Python函数式编程"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://www.hzrr.com/2023/11/04/Python%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/&is_video=false&description=Python函数式编程"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python函数式编程&body=Check out this article: http://www.hzrr.com/2023/11/04/Python%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://www.hzrr.com/2023/11/04/Python%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/&title=Python函数式编程"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://www.hzrr.com/2023/11/04/Python%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/&title=Python函数式编程"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://www.hzrr.com/2023/11/04/Python%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/&title=Python函数式编程"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://www.hzrr.com/2023/11/04/Python%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/&title=Python函数式编程"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://www.hzrr.com/2023/11/04/Python%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/&name=Python函数式编程&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://www.hzrr.com/2023/11/04/Python%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/&t=Python函数式编程"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Python%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">Python函数式编程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E6%A6%82%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">一、函数式编程概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1 编程范式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E7%BB%86%E5%88%86%E8%BF%87%E7%A8%8B%E8%8C%83%E5%BC%8F"><span class="toc-number">1.1.2.</span> <span class="toc-text">1.2 细分过程范式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-1-%E4%BD%BF%E7%94%A8%E5%87%BD%E6%95%B0%E5%BC%8F%E8%8C%83%E5%BC%8F"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">1.2.1 使用函数式范式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-2-%E4%BD%BF%E7%94%A8%E6%B7%B7%E5%90%88%E8%8C%83%E5%BC%8F"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">1.2.2 使用混合范式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-3-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA%E8%BF%87%E7%A8%8B"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">1.2.3 对象的创建过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-4-%E4%B9%8C%E9%BE%9F%E5%A1%94"><span class="toc-number">1.1.2.4.</span> <span class="toc-text">1.2.4 乌龟塔</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E7%BB%8F%E5%85%B8%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.1.3.</span> <span class="toc-text">1.3 函数式编程经典示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-number">1.2.</span> <span class="toc-text">二、函数式编程的特点</span></a></li></ol></li></ol>
       </div>
-      <div class="post-content-wrapper">
-        <div class="post-content">
-          <h1 id="Python函数式编程"><a href="#Python函数式编程" class="headerlink" title="Python函数式编程"></a>Python函数式编程</h1><h2 id="一、函数式编程概述"><a href="#一、函数式编程概述" class="headerlink" title="一、函数式编程概述"></a>一、函数式编程概述</h2><p>函数式编程通过在函数中定义表达式和对表达式求值完成计算。它尽量避免由于状态变化和使用可变对象引入复杂性，让程序变得简洁明了。</p>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Python函数式编程
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">HzRr</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-11-04T08:17:50.000Z" class="dt-published" itemprop="datePublished">2023-11-04</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/functional-programming/" rel="tag">functional programming</a>, <a class="p-category" href="/tags/python/" rel="tag">python</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="Python函数式编程"><a href="#Python函数式编程" class="headerlink" title="Python函数式编程"></a>Python函数式编程</h1><h2 id="一、函数式编程概述"><a href="#一、函数式编程概述" class="headerlink" title="一、函数式编程概述"></a>一、函数式编程概述</h2><p>函数式编程通过在函数中定义表达式和对表达式求值完成计算。它尽量避免由于状态变化和使用可变对象引入复杂性，让程序变得简洁明了。</p>
 <p>Python 包含大量函数式编程特征，但它不是纯粹的函数式编程语言。它不仅具备函数式编程的诸多优势，还保留了命令式编程的强大优化能力。</p>
 <h3 id="1-1-编程范式"><a href="#1-1-编程范式" class="headerlink" title="1.1 编程范式"></a>1.1 编程范式</h3><p>编程范式没有统一划分标准，主要有两个范式：</p>
 <ul>
@@ -171,78 +230,143 @@ Python 包含大量函数式编程特征，但它不是纯粹的函数式编程�
 
 
 <h2 id="二、函数式编程的特点"><a href="#二、函数式编程的特点" class="headerlink" title="二、函数式编程的特点"></a>二、函数式编程的特点</h2>
-        </div>
-          
-        <div class="top-div">
-          <ol class="top-box"><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#Python%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B"><span class="top-box-text">Python函数式编程</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E4%B8%80%E3%80%81%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E6%A6%82%E8%BF%B0"><span class="top-box-text">一、函数式编程概述</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#1-1-%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F"><span class="top-box-text">1.1 编程范式</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#1-2-%E7%BB%86%E5%88%86%E8%BF%87%E7%A8%8B%E8%8C%83%E5%BC%8F"><span class="top-box-text">1.2 细分过程范式</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#1-3-%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E7%BB%8F%E5%85%B8%E7%A4%BA%E4%BE%8B"><span class="top-box-text">1.3 函数式编程经典示例</span></a></li></ol></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E4%BA%8C%E3%80%81%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E7%9A%84%E7%89%B9%E7%82%B9"><span class="top-box-text">二、函数式编程的特点</span></a></li></ol></li></ol>
-        </div>
-          
-      </div>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+          <li><a href="/archives/">归档</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/hzrr">项目</a></li>
+        
+      </ul>
     </div>
 
     
-      <div class="next-post">
-        <a class="purple-link" href="/2023/11/02/%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/">
-          <h3 class="post-title">
-            下一篇：体系结构
-          </h3>
-        </a>
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Python%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">Python函数式编程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E6%A6%82%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">一、函数式编程概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1 编程范式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E7%BB%86%E5%88%86%E8%BF%87%E7%A8%8B%E8%8C%83%E5%BC%8F"><span class="toc-number">1.1.2.</span> <span class="toc-text">1.2 细分过程范式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-1-%E4%BD%BF%E7%94%A8%E5%87%BD%E6%95%B0%E5%BC%8F%E8%8C%83%E5%BC%8F"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">1.2.1 使用函数式范式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-2-%E4%BD%BF%E7%94%A8%E6%B7%B7%E5%90%88%E8%8C%83%E5%BC%8F"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">1.2.2 使用混合范式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-3-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA%E8%BF%87%E7%A8%8B"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">1.2.3 对象的创建过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-4-%E4%B9%8C%E9%BE%9F%E5%A1%94"><span class="toc-number">1.1.2.4.</span> <span class="toc-text">1.2.4 乌龟塔</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E7%BB%8F%E5%85%B8%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.1.3.</span> <span class="toc-text">1.3 函数式编程经典示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-number">1.2.</span> <span class="toc-text">二、函数式编程的特点</span></a></li></ol></li></ol>
       </div>
     
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://www.hzrr.com/2023/11/04/Python%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://www.hzrr.com/2023/11/04/Python%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/&text=Python函数式编程"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://www.hzrr.com/2023/11/04/Python%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/&title=Python函数式编程"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://www.hzrr.com/2023/11/04/Python%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/&is_video=false&description=Python函数式编程"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python函数式编程&body=Check out this article: http://www.hzrr.com/2023/11/04/Python%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://www.hzrr.com/2023/11/04/Python%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/&title=Python函数式编程"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://www.hzrr.com/2023/11/04/Python%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/&title=Python函数式编程"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://www.hzrr.com/2023/11/04/Python%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/&title=Python函数式编程"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://www.hzrr.com/2023/11/04/Python%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/&title=Python函数式编程"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://www.hzrr.com/2023/11/04/Python%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/&name=Python函数式编程&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://www.hzrr.com/2023/11/04/Python%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/&t=Python函数式编程"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
   </div>
-
-
-
-
-
-
-
-
-
-
-<footer>
-<div class="site-footer">
-  <div class="social-container">
-    
-      
-        <a aria-label="跳转至github" href="https://github.com/hzrr" target="_blank">
-          <i class="icon icon-github"></i>
-        </a>
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  </div>
-  
-    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
-  
-  
-  
-  
-  
-  
 </div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023-2024
+    HzRr
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/hzrr">项目</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
 </footer>
 
-
-      </div>
     </div>
-    
-<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
 
 <script src="/js/main.js"></script>
 
+<!-- search -->
 
+<!-- Baidu Analytics -->
 
+<!-- Cloudflare Analytics -->
 
+<!-- Disqus Comments -->
 
+<!-- utterances Comments -->
 
-  </body>
+</body>
 </html>
-

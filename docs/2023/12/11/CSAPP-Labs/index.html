@@ -1,108 +1,167 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
-    
-
-    
-<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
-    
-
-<meta charset="utf-8" >
-
-<title>CSAPP_Labs</title>
-<meta name="keywords" content="CSAPP_Labs, HzRr&#39;s Blog">
-<meta name="description" content="1. DataLabDirectoryLayout:
-12345678910111213141516171819.├── bits.c├── bits.h├── bits.p.c├── btest├── btest.c├── btest.h">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="1. DataLabDirectoryLayout: 12345678910111213141516171819.├── bits.c├── bits.h├── bits.p.c├── btest├── btest.c├── btest.h├── cat├── decl.c├── dlc├── Driverhdrs.pm├── Driverlib.pm├── driver.pl├── echo├─">
+<meta property="og:type" content="article">
 <meta property="og:title" content="CSAPP_Labs">
-<meta property="og:description" content="1. DataLabDirectoryLayout:
-12345678910111213141516171819.├── bits.c├── bits.h├── bits.p.c├── btest├── btest.c├── btest.h">
-
-<link rel="shortcut icon" href="/null">
-<link rel="stylesheet" href="/style/main.css">
-
-  <meta name="generator" content="Hexo 6.3.0"></head>
-  <body>
-    <div id="app" class="main">
-
-<div class="site-header-container">
-  <div class="site-header">
-    <div class="left">
-      <a href="http://www.hzrr.com">
-        <img class="avatar" src="/images/avatar.svg" alt="logo" width="32px" height="32px">
-      </a>
-      <a href="http://www.hzrr.com">
-        <h1 class="site-title">HzRr&#39;s Blog</h1>
-      </a>
-    </div>
-    <div class="right">
-        <i class="icon menu-switch icon-menu-outline" ></i>
-    </div>
-  </div>
-</div>
-
-<div class="menu-container" style="height: 0;opacity: 0;">
-<nav class="menu-list">
-  
+<meta property="og:url" content="http://www.hzrr.com/2023/12/11/CSAPP-Labs/index.html">
+<meta property="og:site_name" content="HzRr&#39;s Blog">
+<meta property="og:description" content="1. DataLabDirectoryLayout: 12345678910111213141516171819.├── bits.c├── bits.h├── bits.p.c├── btest├── btest.c├── btest.h├── cat├── decl.c├── dlc├── Driverhdrs.pm├── Driverlib.pm├── driver.pl├── echo├─">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-11T08:12:40.000Z">
+<meta property="article:modified_time" content="2024-02-29T06:03:04.899Z">
+<meta property="article:author" content="HzRr">
+<meta property="article:tag" content="csapp">
+<meta property="article:tag" content="labs">
+<meta name="twitter:card" content="summary">
     
-      <a href="/" class="menu purple-link">
-        首页
-      </a>
     
-  
-    
-      <a href="/tags" class="menu purple-link">
-        标签
-      </a>
-    
-  
-    
-      <a href="/archives" class="menu purple-link">
-        归档
-      </a>
-    
-  
-    
-      <a href="/about" class="menu purple-link">
-        关于
-      </a>
-    
-  
-</nav>
-</div>
-
-
-
-  <div class="content-container">
-    <div class="post-detail">
       
-      <h2 class="post-title">CSAPP_Labs</h2>
-      <div class="post-info post-detail-info">
-        <span><i class="icon icon-calendar-outline"></i> 2023-12-11</span>
         
-          <span>
-          <i class="icon icon-pricetags-outline"></i>
-            
-              <a href="/tags/csapp/">
-              csapp
-                
-                  ，
-                
-              </a>
-            
-              <a href="/tags/labs/">
-              labs
-                
-              </a>
-            
-          </span>
+          <link rel="shortcut icon" href="/images/favicon.ico">
         
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>CSAPP_Labs</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/hzrr">项目</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2024/01/24/CPython%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2023/11/30/CSAPP-Note/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://www.hzrr.com/2023/12/11/CSAPP-Labs/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://www.hzrr.com/2023/12/11/CSAPP-Labs/&text=CSAPP_Labs"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://www.hzrr.com/2023/12/11/CSAPP-Labs/&title=CSAPP_Labs"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://www.hzrr.com/2023/12/11/CSAPP-Labs/&is_video=false&description=CSAPP_Labs"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CSAPP_Labs&body=Check out this article: http://www.hzrr.com/2023/12/11/CSAPP-Labs/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://www.hzrr.com/2023/12/11/CSAPP-Labs/&title=CSAPP_Labs"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://www.hzrr.com/2023/12/11/CSAPP-Labs/&title=CSAPP_Labs"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://www.hzrr.com/2023/12/11/CSAPP-Labs/&title=CSAPP_Labs"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://www.hzrr.com/2023/12/11/CSAPP-Labs/&title=CSAPP_Labs"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://www.hzrr.com/2023/12/11/CSAPP-Labs/&name=CSAPP_Labs&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://www.hzrr.com/2023/12/11/CSAPP-Labs/&t=CSAPP_Labs"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-DataLab"><span class="toc-number">1.</span> <span class="toc-text">1. DataLab</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-1"><span class="toc-number">1.1.</span> <span class="toc-text">Problem 1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-2"><span class="toc-number">1.2.</span> <span class="toc-text">Problem 2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-3"><span class="toc-number">1.3.</span> <span class="toc-text">Problem 3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-4"><span class="toc-number">1.4.</span> <span class="toc-text">Problem 4</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-5"><span class="toc-number">1.5.</span> <span class="toc-text">Problem 5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-6"><span class="toc-number">1.6.</span> <span class="toc-text">Problem 6</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-7"><span class="toc-number">1.7.</span> <span class="toc-text">Problem 7</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-8"><span class="toc-number">1.8.</span> <span class="toc-text">Problem 8</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-9"><span class="toc-number">1.9.</span> <span class="toc-text">Problem 9</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-10"><span class="toc-number">1.10.</span> <span class="toc-text">Problem 10</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-11"><span class="toc-number">1.11.</span> <span class="toc-text">Problem 11</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-12"><span class="toc-number">1.12.</span> <span class="toc-text">Problem 12</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-13"><span class="toc-number">1.13.</span> <span class="toc-text">Problem 13</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-14"><span class="toc-number">1.14.</span> <span class="toc-text">Problem 14</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Summarize"><span class="toc-number">1.15.</span> <span class="toc-text">Summarize</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-BombLab"><span class="toc-number">2.</span> <span class="toc-text">2. BombLab</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Phase-1"><span class="toc-number">2.1.</span> <span class="toc-text">Phase-1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Answer"><span class="toc-number">2.1.1.</span> <span class="toc-text">Answer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Phase-2"><span class="toc-number">2.2.</span> <span class="toc-text">Phase-2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Answer-1"><span class="toc-number">2.2.1.</span> <span class="toc-text">Answer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Phase-3"><span class="toc-number">2.3.</span> <span class="toc-text">Phase-3</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Answer-2"><span class="toc-number">2.3.1.</span> <span class="toc-text">Answer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Phase-4"><span class="toc-number">2.4.</span> <span class="toc-text">Phase-4</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Answer-3"><span class="toc-number">2.4.1.</span> <span class="toc-text">Answer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Phase-5"><span class="toc-number">2.5.</span> <span class="toc-text">Phase-5</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Answer-4"><span class="toc-number">2.5.1.</span> <span class="toc-text">Answer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Phase-6"><span class="toc-number">2.6.</span> <span class="toc-text">Phase-6</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Answer-5"><span class="toc-number">2.6.1.</span> <span class="toc-text">Answer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Summarize-1"><span class="toc-number">2.7.</span> <span class="toc-text">Summarize</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-AttackLab"><span class="toc-number">3.</span> <span class="toc-text">3. AttackLab</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Phase-1-1"><span class="toc-number">3.1.</span> <span class="toc-text">Phase-1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Answer-6"><span class="toc-number">3.1.1.</span> <span class="toc-text">Answer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Phase-2-1"><span class="toc-number">3.2.</span> <span class="toc-text">Phase-2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Answer-7"><span class="toc-number">3.2.1.</span> <span class="toc-text">Answer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Phase-3-1"><span class="toc-number">3.3.</span> <span class="toc-text">Phase-3</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Answer-8"><span class="toc-number">3.3.1.</span> <span class="toc-text">Answer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Phase-4-1"><span class="toc-number">3.4.</span> <span class="toc-text">Phase-4</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Answer-9"><span class="toc-number">3.4.1.</span> <span class="toc-text">Answer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Phase-5-1"><span class="toc-number">3.5.</span> <span class="toc-text">Phase-5</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Answer-10"><span class="toc-number">3.5.1.</span> <span class="toc-text">Answer</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-ArchitectureLab"><span class="toc-number">4.</span> <span class="toc-text">4. ArchitectureLab</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-A"><span class="toc-number">4.1.</span> <span class="toc-text">Part A</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Function-sum-list"><span class="toc-number">4.1.1.</span> <span class="toc-text">Function sum_list</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Function-rsum-list"><span class="toc-number">4.1.2.</span> <span class="toc-text">Function rsum_list</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Function-copy-block"><span class="toc-number">4.1.3.</span> <span class="toc-text">Function copy_block</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-B"><span class="toc-number">4.2.</span> <span class="toc-text">Part B</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-C"><span class="toc-number">4.3.</span> <span class="toc-text">Part C</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5"><span class="toc-number">5.</span> <span class="toc-text">5.</span></a></li></ol>
       </div>
-      <div class="post-content-wrapper">
-        <div class="post-content">
-          <h1 id="1-DataLab"><a href="#1-DataLab" class="headerlink" title="1. DataLab"></a>1. DataLab</h1><p><strong>DirectoryLayout:</strong></p>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        CSAPP_Labs
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">HzRr</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-12-11T08:12:40.000Z" class="dt-published" itemprop="datePublished">2023-12-11</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/csapp/" rel="tag">csapp</a>, <a class="p-category" href="/tags/labs/" rel="tag">labs</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="1-DataLab"><a href="#1-DataLab" class="headerlink" title="1. DataLab"></a>1. DataLab</h1><p><strong>DirectoryLayout:</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── bits.c</span><br><span class="line">├── bits.h</span><br><span class="line">├── bits.p.c</span><br><span class="line">├── btest</span><br><span class="line">├── btest.c</span><br><span class="line">├── btest.h</span><br><span class="line">├── cat</span><br><span class="line">├── decl.c</span><br><span class="line">├── dlc</span><br><span class="line">├── Driverhdrs.pm</span><br><span class="line">├── Driverlib.pm</span><br><span class="line">├── driver.pl</span><br><span class="line">├── echo</span><br><span class="line">├── fshow.c</span><br><span class="line">├── ishow.c</span><br><span class="line">├── Makefile</span><br><span class="line">├── README</span><br><span class="line">└── tests.c</span><br></pre></td></tr></table></figure>
 
 
@@ -463,78 +522,143 @@
 
 
 <h1 id="5"><a href="#5" class="headerlink" title="5."></a>5.</h1>
-        </div>
-          
-        <div class="top-div">
-          <ol class="top-box"><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#1-DataLab"><span class="top-box-text">1. DataLab</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Problem-1"><span class="top-box-text">Problem 1</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Problem-2"><span class="top-box-text">Problem 2</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Problem-3"><span class="top-box-text">Problem 3</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Problem-4"><span class="top-box-text">Problem 4</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Problem-5"><span class="top-box-text">Problem 5</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Problem-6"><span class="top-box-text">Problem 6</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Problem-7"><span class="top-box-text">Problem 7</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Problem-8"><span class="top-box-text">Problem 8</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Problem-9"><span class="top-box-text">Problem 9</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Problem-10"><span class="top-box-text">Problem 10</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Problem-11"><span class="top-box-text">Problem 11</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Problem-12"><span class="top-box-text">Problem 12</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Problem-13"><span class="top-box-text">Problem 13</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Problem-14"><span class="top-box-text">Problem 14</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Summarize"><span class="top-box-text">Summarize</span></a></li></ol></li><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#2-BombLab"><span class="top-box-text">2. BombLab</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Phase-1"><span class="top-box-text">Phase-1</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#Answer"><span class="top-box-text">Answer</span></a></li></ol></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Phase-2"><span class="top-box-text">Phase-2</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#Answer-1"><span class="top-box-text">Answer</span></a></li></ol></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Phase-3"><span class="top-box-text">Phase-3</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#Answer-2"><span class="top-box-text">Answer</span></a></li></ol></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Phase-4"><span class="top-box-text">Phase-4</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#Answer-3"><span class="top-box-text">Answer</span></a></li></ol></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Phase-5"><span class="top-box-text">Phase-5</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#Answer-4"><span class="top-box-text">Answer</span></a></li></ol></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Phase-6"><span class="top-box-text">Phase-6</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#Answer-5"><span class="top-box-text">Answer</span></a></li></ol></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Summarize-1"><span class="top-box-text">Summarize</span></a></li></ol></li><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#3-AttackLab"><span class="top-box-text">3. AttackLab</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Phase-1-1"><span class="top-box-text">Phase-1</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#Answer-6"><span class="top-box-text">Answer</span></a></li></ol></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Phase-2-1"><span class="top-box-text">Phase-2</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#Answer-7"><span class="top-box-text">Answer</span></a></li></ol></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Phase-3-1"><span class="top-box-text">Phase-3</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#Answer-8"><span class="top-box-text">Answer</span></a></li></ol></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Phase-4-1"><span class="top-box-text">Phase-4</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#Answer-9"><span class="top-box-text">Answer</span></a></li></ol></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Phase-5-1"><span class="top-box-text">Phase-5</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#Answer-10"><span class="top-box-text">Answer</span></a></li></ol></li></ol></li><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#4-ArchitectureLab"><span class="top-box-text">4. ArchitectureLab</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Part-A"><span class="top-box-text">Part A</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#Function-sum-list"><span class="top-box-text">Function sum_list</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#Function-rsum-list"><span class="top-box-text">Function rsum_list</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#Function-copy-block"><span class="top-box-text">Function copy_block</span></a></li></ol></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Part-B"><span class="top-box-text">Part B</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Part-C"><span class="top-box-text">Part C</span></a></li></ol></li><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#5"><span class="top-box-text">5.</span></a></li></ol>
-        </div>
-          
-      </div>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+          <li><a href="/archives/">归档</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/hzrr">项目</a></li>
+        
+      </ul>
     </div>
 
     
-      <div class="next-post">
-        <a class="purple-link" href="/2023/11/30/CSAPP-Note/">
-          <h3 class="post-title">
-            下一篇：CSAPP_Note
-          </h3>
-        </a>
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-DataLab"><span class="toc-number">1.</span> <span class="toc-text">1. DataLab</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-1"><span class="toc-number">1.1.</span> <span class="toc-text">Problem 1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-2"><span class="toc-number">1.2.</span> <span class="toc-text">Problem 2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-3"><span class="toc-number">1.3.</span> <span class="toc-text">Problem 3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-4"><span class="toc-number">1.4.</span> <span class="toc-text">Problem 4</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-5"><span class="toc-number">1.5.</span> <span class="toc-text">Problem 5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-6"><span class="toc-number">1.6.</span> <span class="toc-text">Problem 6</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-7"><span class="toc-number">1.7.</span> <span class="toc-text">Problem 7</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-8"><span class="toc-number">1.8.</span> <span class="toc-text">Problem 8</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-9"><span class="toc-number">1.9.</span> <span class="toc-text">Problem 9</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-10"><span class="toc-number">1.10.</span> <span class="toc-text">Problem 10</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-11"><span class="toc-number">1.11.</span> <span class="toc-text">Problem 11</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-12"><span class="toc-number">1.12.</span> <span class="toc-text">Problem 12</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-13"><span class="toc-number">1.13.</span> <span class="toc-text">Problem 13</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-14"><span class="toc-number">1.14.</span> <span class="toc-text">Problem 14</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Summarize"><span class="toc-number">1.15.</span> <span class="toc-text">Summarize</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-BombLab"><span class="toc-number">2.</span> <span class="toc-text">2. BombLab</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Phase-1"><span class="toc-number">2.1.</span> <span class="toc-text">Phase-1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Answer"><span class="toc-number">2.1.1.</span> <span class="toc-text">Answer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Phase-2"><span class="toc-number">2.2.</span> <span class="toc-text">Phase-2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Answer-1"><span class="toc-number">2.2.1.</span> <span class="toc-text">Answer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Phase-3"><span class="toc-number">2.3.</span> <span class="toc-text">Phase-3</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Answer-2"><span class="toc-number">2.3.1.</span> <span class="toc-text">Answer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Phase-4"><span class="toc-number">2.4.</span> <span class="toc-text">Phase-4</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Answer-3"><span class="toc-number">2.4.1.</span> <span class="toc-text">Answer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Phase-5"><span class="toc-number">2.5.</span> <span class="toc-text">Phase-5</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Answer-4"><span class="toc-number">2.5.1.</span> <span class="toc-text">Answer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Phase-6"><span class="toc-number">2.6.</span> <span class="toc-text">Phase-6</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Answer-5"><span class="toc-number">2.6.1.</span> <span class="toc-text">Answer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Summarize-1"><span class="toc-number">2.7.</span> <span class="toc-text">Summarize</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-AttackLab"><span class="toc-number">3.</span> <span class="toc-text">3. AttackLab</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Phase-1-1"><span class="toc-number">3.1.</span> <span class="toc-text">Phase-1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Answer-6"><span class="toc-number">3.1.1.</span> <span class="toc-text">Answer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Phase-2-1"><span class="toc-number">3.2.</span> <span class="toc-text">Phase-2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Answer-7"><span class="toc-number">3.2.1.</span> <span class="toc-text">Answer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Phase-3-1"><span class="toc-number">3.3.</span> <span class="toc-text">Phase-3</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Answer-8"><span class="toc-number">3.3.1.</span> <span class="toc-text">Answer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Phase-4-1"><span class="toc-number">3.4.</span> <span class="toc-text">Phase-4</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Answer-9"><span class="toc-number">3.4.1.</span> <span class="toc-text">Answer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Phase-5-1"><span class="toc-number">3.5.</span> <span class="toc-text">Phase-5</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Answer-10"><span class="toc-number">3.5.1.</span> <span class="toc-text">Answer</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-ArchitectureLab"><span class="toc-number">4.</span> <span class="toc-text">4. ArchitectureLab</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-A"><span class="toc-number">4.1.</span> <span class="toc-text">Part A</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Function-sum-list"><span class="toc-number">4.1.1.</span> <span class="toc-text">Function sum_list</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Function-rsum-list"><span class="toc-number">4.1.2.</span> <span class="toc-text">Function rsum_list</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Function-copy-block"><span class="toc-number">4.1.3.</span> <span class="toc-text">Function copy_block</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-B"><span class="toc-number">4.2.</span> <span class="toc-text">Part B</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-C"><span class="toc-number">4.3.</span> <span class="toc-text">Part C</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5"><span class="toc-number">5.</span> <span class="toc-text">5.</span></a></li></ol>
       </div>
     
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://www.hzrr.com/2023/12/11/CSAPP-Labs/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://www.hzrr.com/2023/12/11/CSAPP-Labs/&text=CSAPP_Labs"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://www.hzrr.com/2023/12/11/CSAPP-Labs/&title=CSAPP_Labs"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://www.hzrr.com/2023/12/11/CSAPP-Labs/&is_video=false&description=CSAPP_Labs"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CSAPP_Labs&body=Check out this article: http://www.hzrr.com/2023/12/11/CSAPP-Labs/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://www.hzrr.com/2023/12/11/CSAPP-Labs/&title=CSAPP_Labs"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://www.hzrr.com/2023/12/11/CSAPP-Labs/&title=CSAPP_Labs"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://www.hzrr.com/2023/12/11/CSAPP-Labs/&title=CSAPP_Labs"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://www.hzrr.com/2023/12/11/CSAPP-Labs/&title=CSAPP_Labs"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://www.hzrr.com/2023/12/11/CSAPP-Labs/&name=CSAPP_Labs&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://www.hzrr.com/2023/12/11/CSAPP-Labs/&t=CSAPP_Labs"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
   </div>
-
-
-
-
-
-
-
-
-
-
-<footer>
-<div class="site-footer">
-  <div class="social-container">
-    
-      
-        <a aria-label="跳转至github" href="https://github.com/hzrr" target="_blank">
-          <i class="icon icon-github"></i>
-        </a>
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  </div>
-  
-    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
-  
-  
-  
-  
-  
-  
 </div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023-2024
+    HzRr
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/hzrr">项目</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
 </footer>
 
-
-      </div>
     </div>
-    
-<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
 
 <script src="/js/main.js"></script>
 
+<!-- search -->
 
+<!-- Baidu Analytics -->
 
+<!-- Cloudflare Analytics -->
 
+<!-- Disqus Comments -->
 
+<!-- utterances Comments -->
 
-  </body>
+</body>
 </html>
-
