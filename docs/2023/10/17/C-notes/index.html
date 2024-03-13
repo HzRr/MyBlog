@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+
+    
+<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>C Notes</title>
+<meta name="keywords" content="C Notes, HzRr&#39;s Blog">
+<meta name="description" content="[TOC]
+C语言学习笔记数据类型整型C语言中的char型是否为无符号数还是有符号数是Implementation Defined, 由编译器决定。（C标准的Rationale之一：优先考虑效率，而可移植性尚在其次）
+如果为了可移植性，就必">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="C Notes">
+<meta property="og:description" content="[TOC]
+C语言学习笔记数据类型整型C语言中的char型是否为无符号数还是有符号数是Implementation Defined, 由编译器决定。（C标准的Rationale之一：优先考虑效率，而可移植性尚在其次）
+如果为了可移植性，就必">
+
+<link rel="shortcut icon" href="/null">
+<link rel="stylesheet" href="/style/main.css">
+
+  <link rel="stylesheet" href="/style/simple-lightbox.min.css"><meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://example.com">
+        <img class="avatar" src="/images/avatar.svg" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="http://example.com">
+        <h1 class="site-title">HzRr&#39;s Blog</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/archives" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">C Notes</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2023-10-17</span>
+        
+          <span>
+          <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="/tags/C/">
+              C
+                
+                  ，
+                
+              </a>
+            
+              <a href="/tags/Note/">
+              Note
+                
+              </a>
+            
+          </span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <p>[TOC]</p>
+<h1 id="C语言学习笔记"><a href="#C语言学习笔记" class="headerlink" title="C语言学习笔记"></a>C语言学习笔记</h1><h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><h3 id="整型"><a href="#整型" class="headerlink" title="整型"></a>整型</h3><p>C语言中的char型是否为无符号数还是有符号数是Implementation Defined, 由编译器决定。（<strong>C标准的Rationale之一：优先考虑效率，而可移植性尚在其次</strong>）</p>
+<p>如果为了可移植性，就必须写明是signed还是unsigned。<br>整形还包括: short int, int, long int, long long int等几种</p>
+<p>对于<strong>有符号数</strong>在计算机中的表示是Sign and Magnitude、1’s Complement还是2’s Complement, C标准也没有明确规定，也是Implementation Defined。（<strong>大多数体系结构都采用2’s Complement表示法，x86平台也是如此</strong>）</p>
+<p>除了char型在C标准中明确规定占一个字节之外，其它整型占几个字节都是Implementation Defined。通常的编译器实现遵守ILP32或LP64规范，如下表所示。</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>ILP32（位数）</th>
+<th>LP64（位数）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>char</td>
+<td>8</td>
+<td>8</td>
+</tr>
+<tr>
+<td>short</td>
+<td>16</td>
+<td>16</td>
+</tr>
+<tr>
+<td>int</td>
+<td>32</td>
+<td>32</td>
+</tr>
+<tr>
+<td>long</td>
+<td>32</td>
+<td>64</td>
+</tr>
+<tr>
+<td>long long</td>
+<td>64</td>
+<td>64</td>
+</tr>
+<tr>
+<td>pointer</td>
+<td>32</td>
+<td>64</td>
+</tr>
+</tbody></table>
+<p>ILP32这个缩写的意思是int（I）、long（L）和指针（P）类型都占32位，通常32位计算机的C编译器采用这种规范，x86平台的gcc也是如此。LP64是指long（L）和指针占64位，通常64位计算机的C编译器采用这种规范。</p>
+<p>C标准规定的浮点型有float、double、long double，和整型一样，既没有规定每种类型占多少字节，也没有规定采用哪种表示形式。浮点数的实现在各种平台上差异很大，有的处理器有浮点运算单元（FPU，Floating Point Unit），称为硬浮点（Hard-float）实现；有的处理器没有浮点运算单元，只能做整数运算，需要用整数运算来模拟浮点运算，称为软浮点（Soft-float）实现。大部分平台的浮点数实现遵循IEEE 754，float型通常是32位，double型通常是64位。</p>
+<p>long double型通常是比double型精度更高的类型，但各平台的实现有较大差异。在x86平台上，大多数编译器实现的long double型是80位，因为x86的浮点运算单元具有80位精度，gcc实现的long double型是12字节（96位），<strong>这是为了对齐到4字节边界</strong>，也有些编译器实现的long double型和double型精度相同，没有充分利用x86浮点运算单元的精度。其它体系结构的浮点运算单元的精度不同，编译器实现也会不同，例如PowerPC上的long double型通常是128位。</p>
+<h3 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h3><p><a target="_blank" rel="noopener" href="https://akaedu.github.io/book/ch15s03.html">直达链接</a></p>
+<h2 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h2><h3 id="指针初始化"><a href="#指针初始化" class="headerlink" title="指针初始化"></a>指针初始化</h3><p>声明指针时，最好要同时初始化指针，我们知道，在堆栈上分配的变量初始值是不确定的，也就是说指针<code>p</code>所指向的内存地址是不确定的，后面用<code>*p</code>访问不确定的地址就会导致不确定的后果，如果导致段错误还比较容易改正，如果意外改写了数据而导致随后的运行中出错，就很难找到错误原因了。像这种指向不确定地址的指针称为“野指针”（Unbound Pointer），为避免出现野指针，在定义指针变量时就应该给它明确的初值，或者把它初始化为<code>NULL</code>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> *p = <span class="literal">NULL</span>;</span><br><span class="line">	...</span><br><span class="line">	*p = <span class="number">0</span>;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>NULL</code>在C标准库的头文件<code>stddef.h</code>中定义：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> NULL ((void *)0)</span></span><br></pre></td></tr></table></figure>
+
+<p>就是把地址0转换成指针类型，称为空指针，它的特殊之处在于，操作系统不会把任何数据保存在地址0及其附近，也不会把地址0~0xfff的页面映射到物理内存，所以任何对地址0的访问都会立刻导致段错误。<code>*p = 0;</code>会导致段错误，就像放在眼前的炸弹一样很容易找到，相比之下，野指针的错误就像埋下地雷一样，更难发现和排除，这次走过去没事，下次走过去就有事。</p>
+<h3 id="通用指针"><a href="#通用指针" class="headerlink" title="通用指针"></a>通用指针</h3><p><code>void *</code>类型，相当于中间桥梁，<code>void *</code>指针与其它类型的指针之间可以隐式转换，而不必用类型转换运算符。</p>
+<p><code>void *</code>指针所占内存大小同样是一个word，但其不能进行解引用(Dereference)，因为编译器不知道要分配多少个字节给变量</p>
+<h3 id="指针与数组"><a href="#指针与数组" class="headerlink" title="指针与数组"></a>指针与数组</h3><p>数组名做右值时，自动转换成指向数组首元素的指针</p>
+<p>在指针数组中，可以将最后一个元素设为NULL，即空指针，方便遍历数组时更优雅地设置循环结束条件，即<code>arr[i] != NULL</code>，<code>NULL</code>标识着<code>arr</code>的结尾，这个循环碰到<code>NULL</code>就结束，因而不会访问越界，这种用法很形象地称为Sentinel，<code>NULL</code>就像一个哨兵守卫着数组的边界。</p>
+<p><strong>btw:</strong>  index[arr_name] 的写法也是正确的，只不过不建议这么写 </p>
+<blockquote>
+<p>事实上，E1[E2]这种写法和(<em>((E1)+(E2)))是等价的，</em>(pa+2)也可以写成pa[2]，pa就像数组名一样，其实数组名也没有什么特殊的，a[2]之所以能取数组的第2个元素，是因为它等价于*(a+2)，在第 1 节 “数组的基本概念”讲过数组名做右值时自动转换成指向首元素的指针，所以a[2]和pa[2]本质上是一样的，都是通过指针间接寻址访问元素。由于(<em>((E1)+(E2)))显然可以写成(</em>((E2)+(E1)))，所以E1[E2]也可以写成E2[E1]，这意味着2[a]、2[pa]这种写法也是对的，但一般不这么写。</p>
+</blockquote>
+<h3 id="指向常量的指针和常量指针"><a href="#指向常量的指针和常量指针" class="headerlink" title="指向常量的指针和常量指针"></a>指向常量的指针和常量指针</h3><ol>
+<li><p><strong>指向常量的指针</strong>：这是一个指针，它指向的对象不能通过这个指针来修改，但指针自身可以指向其它对象。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> *ptr1;</span><br><span class="line"><span class="type">int</span> <span class="type">const</span> *ptr1;</span><br></pre></td></tr></table></figure>
+
+<p>这意味着，你不能使用<code>ptr1</code>来修改它所指向的整数值，但是你可以更改<code>ptr1</code>使其指向其他整数。</p>
+<p>例子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> x = <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> y = <span class="number">20</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> *ptr1 = &amp;x;</span><br><span class="line"><span class="comment">// *ptr1 = 15; // 这是错误的，因为ptr1指向一个常量</span></span><br><span class="line">ptr1 = &amp;y; <span class="comment">// 这是正确的，因为ptr1自身可以改变指向</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>常量指针</strong>：这是一个常量，它的指向不能改变，但它指向的对象可以被修改。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> *<span class="type">const</span> ptr2;</span><br></pre></td></tr></table></figure>
+
+<p>这意味着，你不能更改<code>ptr2</code>的指向，但是你可以使用<code>ptr2</code>来修改它所指向的整数值。</p>
+<p>例子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> x = <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> *<span class="type">const</span> ptr2 = &amp;x;</span><br><span class="line">*ptr2 = <span class="number">15</span>; <span class="comment">// 这是正确的，因为可以通过ptr2修改它指向的整数值</span></span><br><span class="line"><span class="comment">// ptr2 = &amp;y; // 这是错误的，因为ptr2的指向不能改变</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>指向常量的常量指针</strong>：这是一个常量指针，指向一个常量，因此既不能通过该指针修改所指向的对象，也不能更改指针的指向。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> *<span class="type">const</span> ptr3;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>这些声明之间的差异在于”const”关键字的位置，这决定了哪部分是常量：是指针本身还是它指向的对象</p>
+<p>即使不用<code>const</code>限定符也能写出功能正确的程序，但良好的编程习惯应该尽可能多地使用<code>const</code>，因为：</p>
+<ol>
+<li><code>const</code>给读代码的人传达非常有用的信息。比如一个函数的参数是<code>const char *</code>，你在调用这个函数时就可以放心地传给它<code>char *</code>或<code>const char *</code>指针，而不必担心指针所指的内存单元被改写。</li>
+<li>尽可能多地使用<code>const</code>限定符，把不该变的都声明成只读，这样可以依靠编译器检查程序中的Bug，防止意外改写数据。</li>
+<li><code>const</code>对编译器优化是一个有用的提示，编译器也许会把<code>const</code>变量优化成常量。</li>
+</ol>
+<p>在<a target="_blank" rel="noopener" href="https://akaedu.github.io/book/ch19s03.html#asmc.layout">第 3 节 “变量的存储布局”</a>我们看到，字符串字面值通常分配在<code>.rodata</code>段，而在<a target="_blank" rel="noopener" href="https://akaedu.github.io/book/ch08s04.html#array.string">第 4 节 “字符串”</a>提到，字符串字面值类似于数组名，做右值使用时自动转换成指向首元素的指针，这种指针应该是<code>const char *</code>型。我们知道<code>printf</code>函数原型的第一个参数是<code>const char *</code>型，可以把<code>char *</code>或<code>const char *</code>指针传给它，所以下面这些调用都是合法的：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">char</span> *p = <span class="string">&quot;abcd&quot;</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">char</span> str1[<span class="number">5</span>] = <span class="string">&quot;abcd&quot;</span>;</span><br><span class="line"><span class="type">char</span> str2[<span class="number">5</span>] = <span class="string">&quot;abcd&quot;</span>;</span><br><span class="line"><span class="built_in">printf</span>(p);</span><br><span class="line"><span class="built_in">printf</span>(str1);</span><br><span class="line"><span class="built_in">printf</span>(str2);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;abcd&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>注意上面第一行，如果要定义一个指针指向字符串字面值，这个指针应该是<code>const char *</code>型，如果写成<code>char *p = &quot;abcd&quot;;</code>就不好了，有隐患，例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">char</span> *p = <span class="string">&quot;abcd&quot;</span>;</span><br><span class="line">...</span><br><span class="line">	*p = <span class="string">&#x27;A&#x27;</span>;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>p</code>指向<code>.rodata</code>段，不允许改写，但编译器不会报错，在运行时会出现段错误。</p>
+<h3 id="指向数组的指针和多维数组"><a href="#指向数组的指针和多维数组" class="headerlink" title="指向数组的指针和多维数组"></a>指向数组的指针和多维数组</h3><h4 id="指向数组的指针与指针数组"><a href="#指向数组的指针与指针数组" class="headerlink" title="指向数组的指针与指针数组"></a>指向数组的指针与指针数组</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> (*a)[<span class="number">10</span>];	<span class="comment">// 指向数组的指针</span></span><br><span class="line"><span class="type">int</span> *a[<span class="number">10</span>];		<span class="comment">// 指针数组</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="指向数组的指针的使用"><a href="#指向数组的指针的使用" class="headerlink" title="指向数组的指针的使用"></a>指向数组的指针的使用</h4><h5 id="一维数组"><a href="#一维数组" class="headerlink" title="一维数组"></a>一维数组</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a[<span class="number">10</span>];</span><br><span class="line"><span class="type">int</span> (*pa)[<span class="number">10</span>] = &amp;a;</span><br></pre></td></tr></table></figure>
+
+<p><code>a</code>是一个数组，在<code>&amp;a</code>这个表达式中，数组名做左值，取整个数组的首地址赋给指针<code>pa</code>。注意，<code>&amp;a[0]</code>表示数组<code>a</code>的首元素的首地址，而<code>&amp;a</code>表示数组<code>a</code>的首地址，显然这两个地址的数值相同，但这两个表达式的类型是两种不同的指针类型，前者的类型是<code>int *</code>，而后者的类型是<code>int (*)[10]</code>。</p>
+<p>先将指针<code>pa</code>解引用后进行索引取值<code>*pa[index]</code>，<code>pa[0] </code>则是对这个指针所指向的数组的引用, 因此也可直接使用<code>pa[0][index]</code>来访问数组元素</p>
+<h5 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h5><p><code>a</code>是由<code>int [10]</code>组成的数组，<code>pa</code>则是指向这种元素的指针。所以，如果<code>pa</code>指向<code>a</code>的首元素：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a[<span class="number">5</span>][<span class="number">10</span>];</span><br><span class="line"><span class="type">int</span> (*pa)[<span class="number">10</span>] = &amp;a[<span class="number">0</span>];</span><br></pre></td></tr></table></figure>
+
+<p>则<code>pa[0]</code>和<code>a[0]</code>取的是同一个元素，唯一比原来复杂的地方在于这个元素是由10个<code>int</code>组成的数组，而不是基本类型。这样，我们可以把<code>pa</code>当成二维数组名来使用，<code>pa[1][2]</code>和<code>a[1][2]</code>取的也是同一个元素，而且<code>pa</code>比<code>a</code>用起来更灵活，数组名不支持赋值、自增等运算，而指针可以支持，<code>pa++</code>使<code>pa</code>跳过二维数组的一行（40个字节），指向<code>a[1]</code>的首地址。</p>
+<h5 id="习题"><a href="#习题" class="headerlink" title="习题"></a>习题</h5><p>1、定义以下变量：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> a[<span class="number">4</span>][<span class="number">3</span>][<span class="number">2</span>] = &#123;&#123;&#123;<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>&#125;, &#123;<span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;d&#x27;</span>&#125;, &#123;<span class="string">&#x27;e&#x27;</span>, <span class="string">&#x27;f&#x27;</span>&#125;&#125;,</span><br><span class="line">		   &#123;&#123;<span class="string">&#x27;g&#x27;</span>, <span class="string">&#x27;h&#x27;</span>&#125;, &#123;<span class="string">&#x27;i&#x27;</span>, <span class="string">&#x27;j&#x27;</span>&#125;, &#123;<span class="string">&#x27;k&#x27;</span>, <span class="string">&#x27;l&#x27;</span>&#125;&#125;,</span><br><span class="line">		   &#123;&#123;<span class="string">&#x27;m&#x27;</span>, <span class="string">&#x27;n&#x27;</span>&#125;, &#123;<span class="string">&#x27;o&#x27;</span>, <span class="string">&#x27;p&#x27;</span>&#125;, &#123;<span class="string">&#x27;q&#x27;</span>, <span class="string">&#x27;r&#x27;</span>&#125;&#125;,</span><br><span class="line">		   &#123;&#123;<span class="string">&#x27;s&#x27;</span>, <span class="string">&#x27;t&#x27;</span>&#125;, &#123;<span class="string">&#x27;u&#x27;</span>, <span class="string">&#x27;v&#x27;</span>&#125;, &#123;<span class="string">&#x27;w&#x27;</span>, <span class="string">&#x27;x&#x27;</span>&#125;&#125;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">char</span> (*pa)[<span class="number">2</span>] = &amp;a[<span class="number">1</span>][<span class="number">0</span>];</span><br><span class="line"><span class="type">char</span> (*ppa)[<span class="number">3</span>][<span class="number">2</span>] = &amp;a[<span class="number">1</span>];</span><br></pre></td></tr></table></figure>
+
+<p>要想通过<code>pa</code>或<code>ppa</code>访问数组<code>a</code>中的<code>&#39;r&#39;</code>元素，分别应该怎么写？</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="type">char</span> a[<span class="number">4</span>][<span class="number">3</span>][<span class="number">2</span>] = &#123;&#123;&#123;<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>&#125;, &#123;<span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;d&#x27;</span>&#125;, &#123;<span class="string">&#x27;e&#x27;</span>, <span class="string">&#x27;f&#x27;</span>&#125;&#125;,</span><br><span class="line">                   &#123;&#123;<span class="string">&#x27;g&#x27;</span>, <span class="string">&#x27;h&#x27;</span>&#125;, &#123;<span class="string">&#x27;i&#x27;</span>, <span class="string">&#x27;j&#x27;</span>&#125;, &#123;<span class="string">&#x27;k&#x27;</span>, <span class="string">&#x27;l&#x27;</span>&#125;&#125;,</span><br><span class="line">                   &#123;&#123;<span class="string">&#x27;m&#x27;</span>, <span class="string">&#x27;n&#x27;</span>&#125;, &#123;<span class="string">&#x27;o&#x27;</span>, <span class="string">&#x27;p&#x27;</span>&#125;, &#123;<span class="string">&#x27;q&#x27;</span>, <span class="string">&#x27;r&#x27;</span>&#125;&#125;,</span><br><span class="line">                   &#123;&#123;<span class="string">&#x27;s&#x27;</span>, <span class="string">&#x27;t&#x27;</span>&#125;, &#123;<span class="string">&#x27;u&#x27;</span>, <span class="string">&#x27;v&#x27;</span>&#125;, &#123;<span class="string">&#x27;w&#x27;</span>, <span class="string">&#x27;x&#x27;</span>&#125;&#125;&#125;;</span><br><span class="line"></span><br><span class="line">        <span class="type">char</span> (*pa)[<span class="number">2</span>] = &amp;a[<span class="number">1</span>][<span class="number">0</span>];</span><br><span class="line">        <span class="type">char</span> (*ppa)[<span class="number">3</span>][<span class="number">2</span>] = &amp;a[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%c\n&quot;</span>, pa[<span class="number">5</span>][<span class="number">1</span>]);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%c\n&quot;</span>, ppa[<span class="number">1</span>][<span class="number">2</span>][<span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="函数指针"><a href="#函数指针" class="headerlink" title="函数指针"></a>函数指针</h3><p>在C语言中，函数也是一种类型，可以定义指向函数的指针。我们知道，指针变量的内存单元存放一个地址值，而函数指针存放的就是函数的入口地址（位于<code>.text</code>段）。下面看一个简单的例子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">say_hello</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *str)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Hello %s\n&quot;</span>, str);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">void</span> (*f)(<span class="type">const</span> <span class="type">char</span> *) = say_hello;</span><br><span class="line">	f(<span class="string">&quot;Guys&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>分析一下变量<code>f</code>的类型声明<code>void (*f)(const char *)</code>，<code>f</code>首先跟<code>*</code>号结合在一起，因此是一个指针。<code>(*f)</code>外面是一个函数原型的格式，参数是<code>const char *</code>，返回值是<code>void</code>，所以<code>f</code>是指向这种函数的指针。而<code>say_hello</code>的参数是<code>const char *</code>，返回值是<code>void</code>，正好是这种函数，因此<code>f</code>可以指向<code>say_hello</code>。注意，<code>say_hello</code>是一种函数类型，而函数类型和数组类型类似，做右值使用时自动转换成函数指针类型，所以可以直接赋给<code>f</code>，当然也可以写成<code>void (*f)(const char *) = &amp;say_hello;</code>，把函数<code>say_hello</code>先取地址再赋给<code>f</code>，就不需要自动类型转换了。</p>
+<p>可以直接通过函数指针调用函数，如上面的<code>f(&quot;Guys&quot;)</code>，也可以先用<code>*f</code>取出它所指的函数类型，再调用函数，即<code>(*f)(&quot;Guys&quot;)</code>。可以这么理解：函数调用运算符<code>()</code>要求操作数是函数指针，所以<code>f(&quot;Guys&quot;)</code>是最直接的写法，而<code>say_hello(&quot;Guys&quot;)</code>或<code>(*f)(&quot;Guys&quot;)</code>则是把函数类型自动转换成函数指针然后做函数调用。</p>
+<p>下面再举几个例子区分函数类型和函数指针类型。首先定义函数类型F：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="type">int</span> <span class="title function_">F</span><span class="params">(<span class="type">void</span>)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>这种类型的函数不带参数，返回值是<code>int</code>。那么可以这样声明<code>f</code>和<code>g</code>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">F f, g;</span><br></pre></td></tr></table></figure>
+
+<p>相当于声明：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">f</span><span class="params">(<span class="type">void</span>)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">g</span><span class="params">(<span class="type">void</span>)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>下面这个函数声明是错误的：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">F <span class="title function_">h</span><span class="params">(<span class="type">void</span>)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>因为函数可以返回<code>void</code>类型、标量类型、结构体、联合体，但不能返回函数类型，也不能返回数组类型。而下面这个函数声明是正确的：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">F *<span class="title function_">e</span><span class="params">(<span class="type">void</span>)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>函数<code>e</code>返回一个<code>F *</code>类型的函数指针。如果给<code>e</code>多套几层括号仍然表示同样的意思：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">F *((e))(<span class="type">void</span>);</span><br></pre></td></tr></table></figure>
+
+<p>但如果把<code>*</code>号也套在括号里就不一样了：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> (*fp)(<span class="type">void</span>);</span><br></pre></td></tr></table></figure>
+
+<p>这样声明了一个函数指针，而不是声明一个函数。<code>fp</code>也可以这样声明：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">F *fp;</span><br></pre></td></tr></table></figure>
+
+<p>通过函数指针调用函数和直接调用函数相比有什么好处呢？我们研究一个例子。回顾<a target="_blank" rel="noopener" href="https://akaedu.github.io/book/ch07s03.html#struct.datatag">第 3 节 “数据类型标志”</a>的习题1，由于结构体中多了一个类型字段，需要重新实现<code>real_part</code>、<code>img_part</code>、<code>magnitude</code>、<code>angle</code>这些函数，你当时是怎么实现的？大概是这样吧：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> <span class="title function_">real_part</span><span class="params">(<span class="keyword">struct</span> complex_struct z)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (z.t == RECTANGULAR)</span><br><span class="line">		<span class="keyword">return</span> z.a;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="keyword">return</span> z.a * <span class="built_in">cos</span>(z.b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在类型字段有两种取值，<code>RECTANGULAR</code>和<code>POLAR</code>，每个函数都要<code>if ... else ...</code>，如果类型字段有三种取值呢？每个函数都要<code>if ... else if ... else</code>，或者<code>switch ... case ...</code>。这样维护代码是不够理想的，现在我用函数指针给出一种实现：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> <span class="title function_">rect_real_part</span><span class="params">(<span class="keyword">struct</span> complex_struct z)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> z.a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">double</span> <span class="title function_">rect_img_part</span><span class="params">(<span class="keyword">struct</span> complex_struct z)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> z.b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">double</span> <span class="title function_">rect_magnitude</span><span class="params">(<span class="keyword">struct</span> complex_struct z)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">sqrt</span>(z.a * z.a + z.b * z.b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">double</span> <span class="title function_">rect_angle</span><span class="params">(<span class="keyword">struct</span> complex_struct z)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">double</span> PI = <span class="built_in">acos</span>(<span class="number">-1.0</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (z.a &gt; <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">atan</span>(z.b / z.a);</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">atan</span>(z.b / z.a) + PI;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">double</span> <span class="title function_">pol_real_part</span><span class="params">(<span class="keyword">struct</span> complex_struct z)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> z.a * <span class="built_in">cos</span>(z.b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">double</span> <span class="title function_">pol_img_part</span><span class="params">(<span class="keyword">struct</span> complex_struct z)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> z.a * <span class="built_in">sin</span>(z.b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">double</span> <span class="title function_">pol_magnitude</span><span class="params">(<span class="keyword">struct</span> complex_struct z)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> z.a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">double</span> <span class="title function_">pol_angle</span><span class="params">(<span class="keyword">struct</span> complex_struct z)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> z.b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">double</span> (*real_part_tbl[])(<span class="keyword">struct</span> complex_struct) = &#123; rect_real_part, pol_real_part &#125;;</span><br><span class="line"><span class="type">double</span> (*img_part_tbl[])(<span class="keyword">struct</span> complex_struct) = &#123; rect_img_part, pol_img_part &#125;;</span><br><span class="line"><span class="type">double</span> (*magnitude_tbl[])(<span class="keyword">struct</span> complex_struct) = &#123; rect_magnitude, pol_magnitude &#125;;</span><br><span class="line"><span class="type">double</span> (*angle_tbl[])(<span class="keyword">struct</span> complex_struct) = &#123; rect_angle, pol_angle &#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> real_part(z) real_part_tbl[z.t](z)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> img_part(z) img_part_tbl[z.t](z)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> magnitude(z) magnitude_tbl[z.t](z)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> angle(z) angle_tbl[z.t](z)</span></span><br></pre></td></tr></table></figure>
+
+<p>当调用<code>real_part(z)</code>时，用类型字段<code>z.t</code>做索引，从指针数组<code>real_part_tbl</code>中取出相应的函数指针来调用，也可以达到<code>if ... else ...</code>的效果，但相比之下这种实现更好，每个函数都只做一件事情，而不必用<code>if ... else ...</code>兼顾好几件事情，比如<code>rect_real_part</code>和<code>pol_real_part</code>各做各的，互相独立，而不必把它们的代码都耦合到一个函数中。“低耦合，高内聚”（Low Coupling, High Cohesion）是程序设计的一条基本原则，这样可以更好地复用现有代码，使代码更容易维护。如果类型字段<code>z.t</code>又多了一种取值，只需要添加一组新的函数，修改函数指针数组，原有的函数仍然可以不加改动地复用。</p>
+<h2 id="不完全类型和复杂声明"><a href="#不完全类型和复杂声明" class="headerlink" title="不完全类型和复杂声明"></a>不完全类型和复杂声明</h2><p>C语言的类型分为<strong>函数类型、对象类型和不完全类型</strong>三类，具体类型总结如图所示：</p>
+<p><a class="simple-lightbox" href="/home/origami/Notes/source/_posts/C-notes/pointer.type.gif"><img   src="/images/loading.svg" data-src="/home/origami/Notes/source/_posts/C-notes/pointer.type.gif"  alt="C语言类型总结" lazyload></a></p>
+<p>不完全类型是暂时没有完全定义好的类型，编译器不知道这种类型该占几个字节的存储空间，例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">union</span> <span class="title">u</span>;</span></span><br><span class="line"><span class="type">char</span> str[];</span><br></pre></td></tr></table></figure>
+
+<p>具有不完全类型的变量可以通过多次声明组合成一个完全类型，比如数组<code>str</code>声明两次：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> str[];</span><br><span class="line"><span class="type">char</span> str[<span class="number">10</span>];</span><br></pre></td></tr></table></figure>
+
+<p>当编译器碰到第一个声明时，认为<code>str</code>是一个不完全类型，碰到第二个声明时<code>str</code>就组合成完全类型了，如果编译器处理到程序文件的末尾仍然无法把<code>str</code>组合成一个完全类型，就会报错。读者可能会想，这个语法有什么用呢？为何不在第一次声明时就把<code>str</code>声明成完全类型？有些情况下这么做有一定的理由，<strong>比如第一个声明是写在头文件里的，第二个声明写在<code>.c</code>文件里，这样如果要改数组长度，只改<code>.c</code>文件就行了，头文件可以不用改。</strong></p>
+<p>不完全的结构体类型有重要作用：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s</span> &#123;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">t</span> *<span class="title">pt</span>;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">t</span> &#123;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">s</span> *<span class="title">ps</span>;</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><code>struct s</code>和<code>struct t</code>各有一个指针成员指向另一种类型。编译器从前到后依次处理，当看到<code>struct s &#123; struct t* pt; &#125;;</code>时，认为<code>struct t</code>是一个不完全类型，<code>pt</code>是一个指向不完全类型的指针，尽管如此，这个指针却是完全类型，因为不管什么指针都占4个字节存储空间，这一点很明确。然后编译器又看到<code>struct t &#123; struct s *ps; &#125;;</code>，这时<code>struct t</code>有了完整的定义，就组合成一个完全类型了，<code>pt</code>的类型就组合成一个指向完全类型的指针。由于<code>struct s</code>在前面有完整的定义，所以<code>struct s *ps;</code>也定义了一个指向完全类型的指针。</p>
+<p>这样的类型定义是错误的：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s</span> &#123;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">t</span> <span class="title">ot</span>;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">t</span> &#123;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">s</span> <span class="title">os</span>;</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>编译器看到<code>struct s &#123; struct t ot; &#125;;</code>时，认为<code>struct t</code>是一个不完全类型，无法定义成员<code>ot</code>，因为不知道它该占几个字节。所以结构体中可以递归地定义指针成员，但不能递归地定义变量成员，你可以设想一下，假如允许递归地定义变量成员，<code>struct s</code>中有一个<code>struct t</code>，<code>struct t</code>中又有一个<code>struct s</code>，<code>struct s</code>又中有一个<code>struct t</code>，这就成了一个无穷递归的定义。</p>
+<p>以上是两个结构体构成的递归定义，一个结构体也可以递归定义：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s</span> &#123;</span></span><br><span class="line">	<span class="type">char</span> data[<span class="number">6</span>];</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">s</span>* <span class="title">next</span>;</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>当编译器处理到第一行<code>struct s &#123;</code>时，认为<code>struct s</code>是一个不完全类型，当处理到第三行<code>struct s *next;</code>时，认为<code>next</code>是一个指向不完全类型的指针，当处理到第四行<code>&#125;;</code>时，<code>struct s</code>成了一个完全类型，<code>next</code>也成了一个指向完全类型的指针。类似这样的结构体是很多种数据结构的基本组成单元，如链表、二叉树等</p>
+<h2 id="函数接口"><a href="#函数接口" class="headerlink" title="函数接口"></a>函数接口</h2><h3 id="1-预备知识"><a href="#1-预备知识" class="headerlink" title="1. 预备知识"></a>1. 预备知识</h3><h4 id="1-1-strcpy与strncpy"><a href="#1-1-strcpy与strncpy" class="headerlink" title="1.1. strcpy与strncpy"></a>1.1. strcpy与strncpy</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;string.h&gt;</span><br><span class="line"></span><br><span class="line">char *strcpy(char *dest, const char *src);</span><br><span class="line">char *strncpy(char *dest, const char *src, size_t n);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>strcpy:</strong> 将<code>src</code>指向的内存中的字符串(一直到字符<code>&#39;\0&#39;</code>)拷贝到<code>dest</code>指向的内存中，<code>strcpy</code>只知道<code>src</code>字符串的首地址，不知道长度，因此可能存在读<code>src</code>写<code>dest</code>越界问题。</p>
+</li>
+<li><p><strong>strncpy:</strong> 参数n负责指定最多从<code>src</code>中拷贝n个字节到<code>dest</code>中，<strong>如果拷贝到<code>&#39;\0&#39;</code>就结束</strong>，如果拷贝内到第n个字节，同样会结束，但是存在字符串没有<code>&#39;\0&#39;</code>的隐患，在打印字符串时可能会读越界。</p>
+<blockquote>
+<p><code>strncpy</code>还有一个特性，如果<code>src</code>字符串全部拷完了不足<code>n</code>个字节，那么还差多少个字节就补多少个<code>&#39;\0&#39;</code></p>
+</blockquote>
+</li>
+</ul>
+<h4 id="1-2-malloc与free"><a href="#1-2-malloc与free" class="headerlink" title="1.2. malloc与free"></a>1.2. malloc与free</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> *<span class="title function_">malloc</span><span class="params">(<span class="type">size_t</span> size)</span>;</span><br><span class="line">返回值：成功返回所分配内存空间的首地址，出错返回<span class="literal">NULL</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">free</span><span class="params">(<span class="type">void</span> *ptr)</span>;</span><br></pre></td></tr></table></figure>
+
+<p><code>malloc</code>的参数<code>size</code>表示要分配的字节数，如果分配失败（可能是由于系统内存耗尽）则返回<code>NULL</code>。由于<code>malloc</code>函数不知道用户拿到这块内存要存放什么类型的数据，所以返回通用指针<code>void *</code>，用户程序可以转换成其它类型的指针再访问这块内存。</p>
+<blockquote>
+<p><code>malloc</code>函数保证它返回的指针所指向的地址满足系统的对齐要求，例如在32位平台上返回的指针一定对齐到4字节边界，以保证用户程序把它转换成任何类型的指针都能用。</p>
+</blockquote>
+<p>动态分配的内存用完之后可以用<code>free</code>释放掉，传给<code>free</code>的参数正是先前<code>malloc</code>返回的内存块首地址。</p>
+<p><strong>注意：</strong> </p>
+<ul>
+<li><p>虽然内存耗尽是很不常见的错误，但写程序要规范，<code>malloc</code>之后应该判断是否成功。以后要学习的大部分系统函数都有成功的返回值和失败的返回值，每次调用系统函数都应该判断是否成功。</p>
+</li>
+<li><p><code>free(p);</code>之后，<code>p</code>所指的内存空间是归还了，但是<code>p</code>的值并没有变，因为从<code>free</code>的函数接口来看根本就没法改变<code>p</code>的值，<code>p</code>现在指向的内存空间已经不属于用户，换句话说，<code>p</code>成了野指针，为避免出现野指针，应该在<code>free(p);</code>之后手动置<code>p = NULL;</code>。</p>
+</li>
+<li><p>假如<code>p</code>是一个结构体，并且他的一个变量<code>msg</code>也是通过<code>malloc</code>分配的内存空间，应该先<code>free(p-&gt;msg)</code>，再<code>free(p)</code>。</p>
+</li>
+</ul>
+<blockquote>
+<p>如果一个程序长年累月运行（例如网络服务器程序），并且在循环或递归中调用<code>malloc</code>分配内存，则必须有<code>free</code>与之配对，分配一次就要释放一次，否则每次循环都分配内存，分配完了又不释放，就会慢慢耗尽系统内存，这种错误称为<strong>内存泄漏（Memory Leak）</strong>。</p>
+<p>另外，<code>malloc</code>返回的指针一定要保存好，只有把它传给<code>free</code>才能释放这块内存，如果这个指针丢失了，就没有办法<code>free</code>这块内存了，也会造成内存泄漏。例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">foo</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">char</span> *p = <span class="built_in">malloc</span>(<span class="number">10</span>);</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>foo</code>函数返回时要释放局部变量<code>p</code>的内存空间，它所指向的内存地址就丢失了，这10个字节也就没法释放了。</p>
+<p>内存泄漏的Bug很难找到，因为它不会像访问越界一样导致程序运行错误，少量内存泄漏并不影响程序的正确运行，大量的内存泄漏会使系统内存紧缺，导致频繁换页，不仅影响当前进程，而且把整个系统都拖得很慢。</p>
+<p>关于<code>malloc</code>和<code>free</code>还有一些特殊情况</p>
+<ul>
+<li><code>malloc(0)</code>这种调用也是合法的，也会返回一个非<code>NULL</code>的指针，这个指针也可以传给<code>free</code>释放，但是不能通过这个指针访问内存。</li>
+<li><code>free(NULL)</code>也是合法的，不做任何事情，但是<code>free</code>一个野指针是不合法的，例如先调用<code>malloc</code>返回一个指针<code>p</code>，然后连着调用两次<code>free(p);</code>，则后一次调用会产生运行时错误。</li>
+</ul>
+</blockquote>
+<h3 id="2-传入参数与传出参数"><a href="#2-传入参数与传出参数" class="headerlink" title="2. 传入参数与传出参数"></a>2. 传入参数与传出参数</h3><p>函数的参数可以分为三种类型：</p>
+<ul>
+<li><strong>传入参数:</strong> 把指针所指向的数据传给函数使用。</li>
+<li><strong>传出参数:</strong> 由函数填充指针所指的内存空间，传回给调用者使用。</li>
+<li><strong>传入传出参数:</strong> 同时承担了传入参数和传出参数的角色，这称为<strong>Value-result 参数</strong>。</li>
+</ul>
+<blockquote>
+<p>很多系统函数对于指针参数是<code>NULL</code>的情况有特殊规定：如果传入参数是<code>NULL</code>表示取缺省值，例如<code>pthread_create(3)</code>的<code>pthread_attr_t *</code>参数，也可能表示不做特别处理，例如<code>free</code>的参数；如果传出参数是<code>NULL</code>表示调用者不需要传出值，例如<code>time(2)</code>的参数。这些特殊规定应该在文档中写清楚。</p>
+</blockquote>
+<h3 id="3-两层指针的参数"><a href="#3-两层指针的参数" class="headerlink" title="3. 两层指针的参数"></a>3. 两层指针的参数</h3><p>[TODO]</p>
+<h2 id="C标准库"><a href="#C标准库" class="headerlink" title="C标准库"></a>C标准库</h2><h3 id="1-字符串操作函数"><a href="#1-字符串操作函数" class="headerlink" title="1. 字符串操作函数"></a>1. 字符串操作函数</h3><h4 id="1-1-初始化字符串"><a href="#1-1-初始化字符串" class="headerlink" title="1.1. 初始化字符串"></a>1.1. 初始化字符串</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> *<span class="title function_">memset</span><span class="params">(<span class="type">void</span> *s, <span class="type">int</span> c, <span class="type">size_t</span> n)</span>;</span><br><span class="line"><span class="comment">// 返回值：s指向哪，返回的指针就指向哪</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>作用：</strong> <code>memset</code>函数把<code>s</code>所指的内存地址开始的<code>n</code>个字节都填充为c的值。(可以用于清零初值不确定的内存)</p>
+<h4 id="1-2-取字符串的长度"><a href="#1-2-取字符串的长度" class="headerlink" title="1.2. 取字符串的长度"></a>1.2. 取字符串的长度</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">size_t</span> <span class="title function_">strlen</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *s)</span>;</span><br><span class="line"><span class="comment">// 返回值：字符串的长度</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>作用：</strong> <code>strlen</code>函数返回<code>s</code>所指的字符串的长度。该函数从<code>s</code>所指的第一个字符开始找<code>&#39;\0&#39;</code>字符，一旦找到就返回，返回的长度不包括<code>&#39;\0&#39;</code>字符在内。</p>
+<p>例如定义<code>char buf[] = &quot;hello&quot;;</code>，则<code>strlen(buf)</code>的值是5，但要注意，如果定义<code>char buf[5] = &quot;hello&quot;;</code>（o刚好是第五个元素，因此没有<code>&#39;\0&#39;</code>），则调用<code>strlen(buf)</code>是危险的，会造成数组访问越界。</p>
+<h4 id="1-3-拷贝字符串"><a href="#1-3-拷贝字符串" class="headerlink" title="1.3. 拷贝字符串"></a>1.3. 拷贝字符串</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> *<span class="title function_">memcpy</span><span class="params">(<span class="type">void</span> *dest, <span class="type">const</span> <span class="type">void</span> *src, <span class="type">size_t</span> n)</span>;</span><br><span class="line"><span class="type">void</span> *<span class="title function_">memmove</span><span class="params">(<span class="type">void</span> *dest, <span class="type">const</span> <span class="type">void</span> *src, <span class="type">size_t</span> n)</span>;</span><br><span class="line"><span class="comment">// 返回值：dest指向哪，返回的指针就指向哪</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>memcpy作用：</strong> <code>memcpy</code>函数从<code>src</code>所指的内存地址拷贝<code>n</code>个字节到<code>dest</code>所指的内存地址。</p>
+<p> 和<code>strncpy</code>不同，<code>memcpy</code>并不是遇到<code>&#39;\0&#39;</code>就结束，而是一定会拷贝完<code>n</code>个字节。即以<code>str</code>开头的函数处理以<code>&#39;\0&#39;</code>结尾的字符串，而以<code>mem</code>开头的函数则不关心<code>&#39;\0&#39;</code>字符，或者说这些函数并不把参数当字符串看待，因此参数的指针类型是<code>void *</code>而非<code>char *</code>。</p>
+<p>**memmove作用： **<code>memmove</code>也是从<code>src</code>所指的内存地址拷贝<code>n</code>个字节到<code>dest</code>所指的内存地址。</p>
+<p>但是和<code>memcpy</code>有一点不同，<code>memcpy</code>的两个参数<code>src</code>和<code>dest</code>所指的内存区间如果重叠则无法保证正确拷贝，而<code>memmove</code>却可以正确拷贝。假设定义了一个数组<code>char buf[20] = &quot;hello world\n&quot;;</code>，如果想把其中的字符串往后移动一个字节（变成<code>&quot;hhello world\n&quot;</code>），调用<code>memcpy(buf + 1, buf, 13)</code>是无法保证正确拷贝的。</p>
+<p><strong>注意：</strong> 在C99标准中，新添加了关键字<code>restrict</code>关键字，编程者可提示编译器：在该指针的生命周期内，其指向的对象不会被别的指针所引用。</p>
+<p>在C99中<code>memcpy</code>的原型是</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> *<span class="title function_">memcpy</span><span class="params">(<span class="type">void</span> * <span class="keyword">restrict</span> s1, <span class="type">const</span> <span class="type">void</span> * <span class="keyword">restrict</span> s2, <span class="type">size_t</span> n)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>就是告诉调用者，这个函数的实现可能会做些优化，编译器也可能会做些优化，传进来的指针不允许指向重叠的内存区间，否则结果可能是错的。</p>
+<p>字符串的拷贝也可以用<code>strdup(3)</code>函数，这个函数不属于C标准库，是POSIX标准中定义的，POSIX标准定义了UNIX系统的各种接口，包含C标准库的所有函数和很多其它的系统函数，在<a target="_blank" rel="noopener" href="https://akaedu.github.io/book/ch28s02.html#io.twoioflavors">第 2 节 “C标准I&#x2F;O库函数与Unbuffered I&#x2F;O函数”</a>将详细介绍POSIX标准。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">char</span> *<span class="title function_">strdup</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *s)</span>;</span><br><span class="line"><span class="comment">// 返回值：指向新分配的字符串</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong> 这个函数调用<code>malloc</code>动态分配内存，把字符串<code>s</code>拷贝到新分配的内存中然后返回。用这个函数省去了事先为新字符串分配内存的麻烦，但是用完之后要记得调用<code>free</code>释放新字符串的内存。</p>
+<h4 id="1-4-连接字符串"><a href="#1-4-连接字符串" class="headerlink" title="1.4. 连接字符串"></a>1.4. 连接字符串</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">char</span> *<span class="title function_">strcat</span><span class="params">(<span class="type">char</span> *dest, <span class="type">const</span> <span class="type">char</span> *src)</span>;</span><br><span class="line"><span class="type">char</span> *<span class="title function_">strncat</span><span class="params">(<span class="type">char</span> *dest, <span class="type">const</span> <span class="type">char</span> *src, <span class="type">size_t</span> n)</span>;</span><br><span class="line"><span class="comment">// 返回值：dest指向哪，返回的指针就指向哪</span></span><br></pre></td></tr></table></figure>
+
+<p><code>strcat</code>把<code>src</code>所指的字符串连接到<code>dest</code>所指的字符串后面。例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> d[<span class="number">10</span>] = <span class="string">&quot;foo&quot;</span>;</span><br><span class="line"><span class="type">char</span> s[<span class="number">10</span>] = <span class="string">&quot;bar&quot;</span>;</span><br><span class="line"><span class="built_in">strcat</span>(d, s);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%s %s\n&quot;</span>, d, s);</span><br></pre></td></tr></table></figure>
+
+<p>调用<code>strcat</code>函数后，缓冲区<code>s</code>的内容没变，缓冲区<code>d</code>中保存着字符串<code>&quot;foobar&quot;</code>，注意原来<code>&quot;foo&quot;</code>后面的<code>&#39;\0&#39;</code>被连接上来的字符串<code>&quot;bar&quot;</code>覆盖掉了，<code>&quot;bar&quot;</code>后面的<code>&#39;\0&#39;</code>仍保留。</p>
+<p><code>strcat</code>和<code>strcpy</code>有同样的问题，调用者必须确保<code>dest</code>缓冲区足够大，否则会导致缓冲区溢出错误。<code>strncat</code>函数通过参数<code>n</code>指定一个长度，就可以避免缓冲区溢出错误。注意这个参数<code>n</code>的含义和<code>strncpy</code>的参数<code>n</code>不同，它并不是缓冲区<code>dest</code>的长度，而是表示最多从<code>src</code>缓冲区中取<code>n</code>个字符（不包括结尾的<code>&#39;\0&#39;</code>）连接到<code>dest</code>后面。如果<code>src</code>中前<code>n</code>个字符没有出现<code>&#39;\0&#39;</code>，则取前<code>n</code>个字符再加一个<code>&#39;\0&#39;</code>连接到<code>dest</code>后面，所以<code>strncat</code>总是保证<code>dest</code>缓冲区以<code>&#39;\0&#39;</code>结尾，这一点又和<code>strncpy</code>不同，<code>strncpy</code>并不保证<code>dest</code>缓冲区以<code>&#39;\0&#39;</code>结尾。所以，提供给<code>strncat</code>函数的<code>dest</code>缓冲区的大小至少应该是<code>strlen(dest)+n+1</code>个字节，才能保证不溢出。</p>
+<h4 id="1-5-比较字符串"><a href="#1-5-比较字符串" class="headerlink" title="1.5. 比较字符串"></a>1.5. 比较字符串</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">memcmp</span><span class="params">(<span class="type">const</span> <span class="type">void</span> *s1, <span class="type">const</span> <span class="type">void</span> *s2, <span class="type">size_t</span> n)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">strcmp</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *s1, <span class="type">const</span> <span class="type">char</span> *s2)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">strncmp</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *s1, <span class="type">const</span> <span class="type">char</span> *s2, <span class="type">size_t</span> n)</span>;</span><br><span class="line"><span class="comment">// 返回值：负值表示s1小于s2，0表示s1等于s2，正值表示s1大于s2</span></span><br></pre></td></tr></table></figure>
+
+<p><code>memcmp</code>从前到后逐个比较缓冲区<code>s1</code>和<code>s2</code>的前<code>n</code>个字节（不管里面有没有<code>&#39;\0&#39;</code>），如果<code>s1</code>和<code>s2</code>的前<code>n</code>个字节全都一样就返回0，如果遇到不一样的字节，<code>s1</code>的字节比<code>s2</code>小就返回负值，<code>s1</code>的字节比<code>s2</code>大就返回正值。</p>
+<p><code>strcmp</code>把<code>s1</code>和<code>s2</code>当字符串比较，在其中一个字符串中遇到<code>&#39;\0&#39;</code>时结束，按照上面的比较准则，<code>&quot;ABC&quot;</code>比<code>&quot;abc&quot;</code>小，<code>&quot;ABCD&quot;</code>比<code>&quot;ABC&quot;</code>大，<code>&quot;123A9&quot;</code>比<code>&quot;123B2&quot;</code>小。</p>
+<p><code>strncmp</code>的比较结束条件是：要么在其中一个字符串中遇到<code>&#39;\0&#39;</code>结束（类似于<code>strcmp</code>），要么比较完<code>n</code>个字符结束（类似于<code>memcmp</code>）。例如，<code>strncmp(&quot;ABCD&quot;, &quot;ABC&quot;, 3)</code>的返回值是0，<code>strncmp(&quot;ABCD&quot;, &quot;ABC&quot;, 4)</code>的返回值是正值。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;strings.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">strcasecmp</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *s1, <span class="type">const</span> <span class="type">char</span> *s2)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">strncasecmp</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *s1, <span class="type">const</span> <span class="type">char</span> *s2, <span class="type">size_t</span> n)</span>;</span><br><span class="line"><span class="comment">// 返回值：负值表示s1小于s2，0表示s1等于s2，正值表示s1大于s2</span></span><br></pre></td></tr></table></figure>
+
+<p>这两个函数和<code>strcmp</code>&#x2F;<code>strncmp</code>类似，但在比较过程中忽略大小写，大写字母A和小写字母a认为是相等的。这两个函数不属于C标准库，是POSIX标准中定义的。</p>
+<h4 id="1-6-搜索字符串"><a href="#1-6-搜索字符串" class="headerlink" title="1.6. 搜索字符串"></a>1.6. 搜索字符串</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">char</span> *<span class="title function_">strchr</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *s, <span class="type">int</span> c)</span>;</span><br><span class="line"><span class="type">char</span> *<span class="title function_">strrchr</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *s, <span class="type">int</span> c)</span>;</span><br><span class="line"><span class="comment">// 返回值：如果找到字符c，返回字符串s中指向字符c的指针，如果找不到就返回NULL</span></span><br></pre></td></tr></table></figure>
+
+<p><code>strchr</code>在字符串<code>s</code>中从前到后查找字符<code>c</code>，找到字符<code>c</code>第一次出现的位置时就返回，返回值指向这个位置，如果找不到字符<code>c</code>就返回<code>NULL</code>。<code>strrchr</code>和<code>strchr</code>类似，但是从右向左找字符<code>c</code>，找到字符<code>c</code>第一次出现的位置就返回，函数名中间多了一个字母r可以理解为Right-to-left。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">char</span> *<span class="title function_">strstr</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *haystack, <span class="type">const</span> <span class="type">char</span> *needle)</span>;</span><br><span class="line"><span class="comment">// 返回值：如果找到子串，返回值指向子串的开头，如果找不到就返回NULL</span></span><br></pre></td></tr></table></figure>
+
+<p><code>strstr</code>在一个长字符串中从前到后找一个子串（Substring），找到子串第一次出现的位置就返回，返回值指向子串的开头，如果找不到就返回NULL。这两个参数名很形象，在干草堆<code>haystack</code>中找一根针<code>needle</code>，按中文的说法叫大海捞针，显然<code>haystack</code>是长字符串，<code>needle</code>是要找的子串。</p>
+<h4 id="1-7-分割字符串"><a href="#1-7-分割字符串" class="headerlink" title="1.7. 分割字符串"></a>1.7. 分割字符串</h4><p>C标准库提供的<code>strtok</code>函数可以很方便地完成分割字符串的操作。tok是Token的缩写，分割出来的每一段字符串称为一个Token。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">char</span> *<span class="title function_">strtok</span><span class="params">(<span class="type">char</span> *str, <span class="type">const</span> <span class="type">char</span> *delim)</span>;</span><br><span class="line"><span class="type">char</span> *<span class="title function_">strtok_r</span><span class="params">(<span class="type">char</span> *str, <span class="type">const</span> <span class="type">char</span> *delim, <span class="type">char</span> **saveptr)</span>;</span><br><span class="line"><span class="comment">// 返回值：返回指向下一个Token的指针，如果没有下一个Token了就返回NULL</span></span><br></pre></td></tr></table></figure>
+
+<p>参数<code>str</code>是待分割的字符串，<code>delim</code>是分隔符，可以指定一个或多个分隔符，<code>strtok</code>遇到其中任何一个分隔符就会分割字符串。</p>
+<p><strong>strtok：</strong> strtok中有一个静态指针变量记住上次处理到字符串中的什么位置，所以不需要每次调用时都把字符串中的当前处理位置传给<code>strtok</code><del>，但是在函数中使用静态变量是不好的，这样的函数是不可重入的</del></p>
+<p><strong>strtok_r：</strong> <code>strtok_r</code>函数则不存在这个问题，它的内部没有静态变量，调用者需要自己分配一个指针变量来维护字符串中的当前处理位置，每次调用时把这个指针变量的地址传给<code>strtok_r</code>的第三个参数，告诉<code>strtok_r</code>从哪里开始处理，<code>strtok_r</code>返回时再把新的处理位置写回到这个指针变量中（这是一个Value-result参数）。<code>strtok_r</code>末尾的r就表示可重入（Reentrant），这个函数不属于C标准库，是在POSIX标准中定义的。</p>
+<p>Man Page的<em><strong>BUGS</strong></em>部分指出了用<code>strtok</code>和<code>strtok_r</code>函数需要注意的问题：</p>
+<ul>
+<li>这两个函数要改写字符串以达到分割的效果</li>
+<li>这两个函数不能用于常量字符串，因为试图改写<code>.rodata</code>段会产生段错误</li>
+<li>在做了分割之后，字符串中的分隔符就被<code>&#39;\0&#39;</code>覆盖了</li>
+<li><code>strtok</code>函数使用了静态变量，它不是线程安全的，必要时应该用可重入的<code>strtok_r</code>函数</li>
+</ul>
+<p><strong>strtok详细分析</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">char</span> str[] = <span class="string">&quot;root:x::0:root:/root:/bin/bash:&quot;</span>;</span><br><span class="line">	<span class="type">char</span> *token;</span><br><span class="line"></span><br><span class="line">	token = strtok(str, <span class="string">&quot;:&quot;</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, token);</span><br><span class="line">	<span class="keyword">while</span> ( (token = strtok(<span class="literal">NULL</span>, <span class="string">&quot;:&quot;</span>)) != <span class="literal">NULL</span>)</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, token);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ ./a.out </span><br><span class="line">root</span><br><span class="line">x</span><br><span class="line">0</span><br><span class="line">root</span><br><span class="line">/root</span><br><span class="line">/bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>结合这个例子，<code>strtok</code>的行为可以这样理解：冒号是分隔符，把<code>&quot;root:x::0:root:/root:/bin/bash:&quot;</code>这个字符串分隔成<code>&quot;root&quot;</code>、<code>&quot;x&quot;</code>、<code>&quot;&quot;</code>、<code>&quot;0&quot;</code>、<code>&quot;root&quot;</code>、<code>&quot;/root&quot;</code>、<code>&quot;/bin/bash&quot;</code>、<code>&quot;&quot;</code>等几个Token，但空字符串的Token被忽略。第一次调用要把字符串首地址传给<code>strtok</code>的第一个参数，以后每次调用第一个参数只要传<code>NULL</code>就可以了，<code>strtok</code>函数自己会记住上次处理到字符串的什么位置（显然这是通过<code>strtok</code>函数中的一个静态指针变量记住的）。</p>
+<p>用<code>gdb</code>跟踪这个程序，会发现<code>str</code>字符串被<code>strtok</code>不断修改，每次调用<code>strtok</code>把<code>str</code>中的一个分隔符改成<code>&#39;\0&#39;</code>，分割出一个小字符串，并返回这个小字符串的首地址。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">(gdb) start</span><br><span class="line">Breakpoint <span class="number">1</span> at <span class="number">0x8048415</span>: file main.c, line <span class="number">5.</span></span><br><span class="line">Starting program: /home/akaedu/a.out </span><br><span class="line"><span class="title function_">main</span> <span class="params">()</span> at main.c:5</span><br><span class="line">5	&#123;</span><br><span class="line">(gdb) n</span><br><span class="line"><span class="number">6</span>		<span class="type">char</span> str[] = <span class="string">&quot;root:x::0:root:/root:/bin/bash:&quot;</span>;</span><br><span class="line">(gdb) </span><br><span class="line"><span class="number">9</span>		token = strtok(str, <span class="string">&quot;:&quot;</span>);</span><br><span class="line">(gdb) display str</span><br><span class="line"><span class="number">1</span>: str = <span class="string">&quot;root:x::0:root:/root:/bin/bash:&quot;</span></span><br><span class="line">(gdb) n</span><br><span class="line"><span class="number">10</span>		<span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, token);</span><br><span class="line"><span class="number">1</span>: str = <span class="string">&quot;root\000x::0:root:/root:/bin/bash:&quot;</span></span><br><span class="line">(gdb) </span><br><span class="line">root</span><br><span class="line"><span class="number">11</span>		<span class="keyword">while</span> ( (token = strtok(<span class="literal">NULL</span>, <span class="string">&quot;:&quot;</span>)) != <span class="literal">NULL</span>)</span><br><span class="line"><span class="number">1</span>: str = <span class="string">&quot;root\000x::0:root:/root:/bin/bash:&quot;</span></span><br><span class="line">(gdb) </span><br><span class="line"><span class="number">12</span>			<span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, token);</span><br><span class="line"><span class="number">1</span>: str = <span class="string">&quot;root\000x\000:0:root:/root:/bin/bash:&quot;</span></span><br><span class="line">(gdb) </span><br><span class="line">x</span><br><span class="line"><span class="number">11</span>		<span class="keyword">while</span> ( (token = strtok(<span class="literal">NULL</span>, <span class="string">&quot;:&quot;</span>)) != <span class="literal">NULL</span>)</span><br><span class="line"><span class="number">1</span>: str = <span class="string">&quot;root\000x\000:0:root:/root:/bin/bash:&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-标准I-O库函数"><a href="#2-标准I-O库函数" class="headerlink" title="2. 标准I&#x2F;O库函数"></a>2. 标准I&#x2F;O库函数</h3><h4 id="2-1-fopen-fclose"><a href="#2-1-fopen-fclose" class="headerlink" title="2.1. fopen&#x2F;fclose"></a>2.1. fopen&#x2F;fclose</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FILE *<span class="title function_">fopen</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *path, <span class="type">const</span> <span class="type">char</span> *mode)</span>; <span class="comment">// 返回值：成功返回文件指针，出错返回NULL并设置errno</span></span><br></pre></td></tr></table></figure>
+
+<p>mode同python</p>
+<h4 id="2-2-stdin-stdout-stderr"><a href="#2-2-stdin-stdout-stderr" class="headerlink" title="2.2. stdin&#x2F;stdout&#x2F;stderr"></a>2.2. stdin&#x2F;stdout&#x2F;stderr</h4><p><strong>stdin:</strong> 标准输入(Standard Input)</p>
+<p><strong>stdout:</strong> 标准输出(Standard Output)</p>
+<p><strong>stderr:</strong> 标准错误输出(Standard Error)</p>
+<h4 id="2-3-errno与perror函数"><a href="#2-3-errno与perror函数" class="headerlink" title="2.3. errno与perror函数"></a>2.3. errno与perror函数</h4><p><code>errno</code>在头文件errno.h中声明，是一个整形变量，所有错误码都是正整数。一般使用<code>perror</code>或<code>strerror</code>函数将<code>errno</code>解释称字符串再打印</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">perror</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *s)</span>;</span><br></pre></td></tr></table></figure>
+
+<p><code>perror</code>函数的输出是： 先打印<code>s</code>所指的字符串，然后打印”:”，然后根据当前<code>errno</code>的值打印错误原因</p>
+<p><strong>ps:</strong> <code>perror</code>等的<strong>系统函数</strong>具有的side effect会改变<code>errno</code>的值(例外如： <code>strcpy</code>)，因此调用完<code>perror</code>后，<code>errno</code>的值已经改变</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> *<span class="title function_">strerror</span><span class="params">(<span class="type">int</span> errnum)</span>;</span><br></pre></td></tr></table></figure>
+
+<p><code>strerror</code>函数可以根据错误号返回错误原因字符串，因此可以这样输出到<code>stderr</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">fputs</span>(strerror(n), <span class="built_in">stderr</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-4-以字节为单位的I-O函数"><a href="#2-4-以字节为单位的I-O函数" class="headerlink" title="2.4.  以字节为单位的I&#x2F;O函数"></a>2.4.  以字节为单位的I&#x2F;O函数</h4><p>fgetc函数从指定的文件中读一个字节，getchar从标准输入读一个字节，因此<code>getchar()</code>与<code>fgetc(stdin)</code>等价</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">fgetc</span><span class="params">(FILE *stream)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">getchar</span><span class="params">(<span class="type">void</span>)</span>;</span><br><span class="line"><span class="comment">// 返回值：成功返回读到的字节，出错或者读到文件末尾时返回EOF</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>ps:</strong> 可以看到，<code>fgetc</code>和<code>getchar</code>的返回值都是<code>int</code>型，原因是有可能会返回EOF, 即-1（保存在<code>int</code>型中为0xffffffff）,如果返回值为unsigned char，则无法区分返回值是EOF还是字节0xff，因此，<strong>fgetc&#x2F;getchar的返回值一定要保存在int型变量中。</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">fputc</span><span class="params">(<span class="type">int</span> c, FILE *stream)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">putchar</span><span class="params">(<span class="type">int</span> c)</span>;</span><br><span class="line"><span class="comment">// 返回值：成功返回写入的字节，出错返回EOF</span></span><br></pre></td></tr></table></figure>
+
+<p>当调用<code>getchar()</code>或<code>fgetc(stdin)</code>时，如果用户没有输入字符，它就会<strong>阻塞等待</strong>，函数调用不返回，只有<strong>当用户输入回车或者到达文件末尾时</strong><code>getchar</code>才返回(<em><strong>这些特性取决于终端的工作模式，终端可以配置成一次一行的模式，也可以配置成一次一个字符的模式，默认是一次一行的模式</strong></em>)</p>
+<h4 id="2-5-操作读写位置的函数"><a href="#2-5-操作读写位置的函数" class="headerlink" title="2.5. 操作读写位置的函数"></a>2.5. 操作读写位置的函数</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">fseek</span><span class="params">(FILE *stream, <span class="type">long</span> offset, <span class="type">int</span> whence)</span>;</span><br><span class="line"><span class="comment">// 返回值：成功返回0，出错返回-1并设置errno</span></span><br><span class="line"></span><br><span class="line"><span class="type">long</span> <span class="title function_">ftell</span><span class="params">(FILE *stream)</span>;</span><br><span class="line"><span class="comment">// 返回值：成功返回当前读写位置，出错返回-1并设置errno</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">rewind</span><span class="params">(FILE *stream)</span>;</span><br><span class="line"><span class="comment">// 把读写位置移到文件开头</span></span><br></pre></td></tr></table></figure>
+
+<p><code>fseek</code>的<code>whence</code>和<code>offset</code>参数共同决定了读写位置移动到何处，<code>whence</code>参数的含义如下：</p>
+<ul>
+<li><p><code>SEEK_SET</code></p>
+<p>从文件开头移动<code>offset</code>个字节</p>
+</li>
+<li><p><code>SEEK_CUR</code></p>
+<p>从当前位置移动<code>offset</code>个字节</p>
+</li>
+<li><p><code>SEEK_END</code></p>
+<p>从文件末尾移动<code>offset</code>个字节</p>
+</li>
+</ul>
+<p><code>offset</code><strong>可正可负</strong>，<strong>负值</strong>表示向前（向文件开头的方向）移动，<strong>正值</strong>表示向后（向文件末尾的方向）移动，如果<strong>向前移动的字节数超过了文件开头则出错返回</strong>，如果向后移动的字节数超过了文件末尾，再次写入时将<strong>增大文件尺寸，从原来的文件末尾到<code>fseek</code>移动之后的读写位置之间的字节都是0。</strong></p>
+<h4 id="2-6-以字符串为单位的I-O函数"><a href="#2-6-以字符串为单位的I-O函数" class="headerlink" title="2.6. 以字符串为单位的I&#x2F;O函数"></a>2.6. 以字符串为单位的I&#x2F;O函数</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> *<span class="title function_">fgets</span><span class="params">(<span class="type">char</span> *s, <span class="type">int</span> size, FILE *stream)</span>;</span><br><span class="line"><span class="type">char</span> *<span class="title function_">gets</span><span class="params">(<span class="type">char</span> *s)</span>;</span><br><span class="line"><span class="comment">// 返回值：成功时s指向哪返回的指针就指向哪，出错或者读到文件末尾时返回NULL</span></span><br></pre></td></tr></table></figure>
+
+<p><code>fgets</code>函数的参数：</p>
+<ul>
+<li><p><code>s</code>是缓冲区的首地址</p>
+</li>
+<li><p><code>size</code>是缓冲区的长度</p>
+<blockquote>
+<p>该函数从<code>stream</code>所指的文件中读取以<code>&#39;\n&#39;</code>结尾的一行（包括<code>&#39;\n&#39;</code>在内）存到缓冲区<code>s</code>中，并且在该行末尾添加一个<code>&#39;\0&#39;</code>组成完整的字符串。</p>
+<p>如果文件中的一行太长，<code>fgets</code>从文件中读了<code>size-1</code>个字符还没有读到<code>&#39;\n&#39;</code>，就把已经读到的<code>size-1</code>个字符和一个<code>&#39;\0&#39;</code>字符存入缓冲区，文件中剩下的半行可以在下次调用<code>fgets</code>时继续读。</p>
+<p>如果一次<code>fgets</code>调用在读入若干个字符后到达文件末尾，则将已读到的字符串加上<code>&#39;\0&#39;</code>存入缓冲区并返回，如果再次调用<code>fgets</code>则返回<code>NULL</code>，可以据此判断是否读到文件末尾。</p>
+</blockquote>
+</li>
+<li><p><code>stream</code>是文件指针</p>
+</li>
+</ul>
+<blockquote>
+<p>注意，对于<code>fgets</code>来说，<code>&#39;\n&#39;</code>是一个特别的字符，而<code>&#39;\0&#39;</code>并无任何特别之处，如果读到<code>&#39;\0&#39;</code>就当作普通字符读入。如果文件中存在<code>&#39;\0&#39;</code>字符（或者说0x00字节），调用<code>fgets</code>之后就无法判断缓冲区中的<code>&#39;\0&#39;</code>究竟是从文件读上来的字符还是由<code>fgets</code>自动添加的结束符，所以<code>fgets</code>只适合读文本文件而不适合读二进制文件，并且文本文件中的所有字符都应该是可见字符，不能有<code>&#39;\0&#39;</code>。</p>
+</blockquote>
+<p><strong>Never use gets()!!!</strong></p>
+<blockquote>
+<p><code>gets</code>函数的存在只是为了兼容以前的程序，我们写的代码都不应该调用这个函数。<code>gets</code>函数的接口设计得很有问题，就像<code>strcpy</code>一样，用户提供一个缓冲区，却不能指定缓冲区的大小，很可能导致缓冲区溢出错误，这个函数比<code>strcpy</code>更加危险，<code>strcpy</code>的输入和输出都来自程序内部，只要程序员小心一点就可以避免出问题，而<code>gets</code>读取的输入直接来自程序外部，用户可能通过标准输入提供任意长的字符串，程序员无法避免<code>gets</code>函数导致的缓冲区溢出错误，所以唯一的办法就是不要用它。</p>
+</blockquote>
+<p><code>fputs</code>向指定的文件写入一个字符串，<code>puts</code>向标准输出写入一个字符串。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">fputs</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *s, FILE *stream)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">puts</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *s)</span>;</span><br><span class="line"><span class="comment">// 返回值：成功返回一个非负整数，出错返回EOF</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>缓冲区<code>s</code>中保存的是以<code>&#39;\0&#39;</code>结尾的字符串，<code>fputs</code>将该字符串写入文件<code>stream</code>，但并不写入结尾的<code>&#39;\0&#39;</code>。与<code>fgets</code>不同的是，<code>fputs</code>并不关心的字符串中的<code>&#39;\n&#39;</code>字符，字符串中可以有<code>&#39;\n&#39;</code>也可以没有<code>&#39;\n&#39;</code>。<code>puts</code>将字符串<code>s</code>写到标准输出（不包括结尾的<code>&#39;\0&#39;</code>），然后自动写一个<code>&#39;\n&#39;</code>到标准输出。</p>
+</blockquote>
+<h4 id="2-7-以记录为单位的I-O函数"><a href="#2-7-以记录为单位的I-O函数" class="headerlink" title="2.7. 以记录为单位的I&#x2F;O函数"></a>2.7. 以记录为单位的I&#x2F;O函数</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">size_t</span> <span class="title function_">fread</span><span class="params">(<span class="type">void</span> *ptr, <span class="type">size_t</span> size, <span class="type">size_t</span> nmemb, FILE *stream)</span>;</span><br><span class="line"><span class="type">size_t</span> <span class="title function_">fwrite</span><span class="params">(<span class="type">const</span> <span class="type">void</span> *ptr, <span class="type">size_t</span> size, <span class="type">size_t</span> nmemb, FILE *stream)</span>;</span><br><span class="line"><span class="comment">// 返回值：读或写的记录数，成功时返回的记录数等于nmemb，出错或读到文件末尾时返回的记录数小于nmemb，也可能返回0</span></span><br></pre></td></tr></table></figure>
+
+<p>这里的记录是指<strong>一串固定长度的字节</strong>，比如一个<code>int</code>、一个结构体或者一个定长数组。参数<code>size</code>指出一条记录的长度，而<code>nmemb</code>指出要读或写多少条记录，这些记录在<code>ptr</code>所指的内存空间中连续存放，共占<code>size * nmemb</code>个字节</p>
+<h4 id="2-8-格式化I-O函数"><a href="#2-8-格式化I-O函数" class="headerlink" title="2.8. 格式化I&#x2F;O函数"></a>2.8. 格式化I&#x2F;O函数</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">printf</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *format, ...)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">fprintf</span><span class="params">(FILE *stream, <span class="type">const</span> <span class="type">char</span> *format, ...)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">sprintf</span><span class="params">(<span class="type">char</span> *str, <span class="type">const</span> <span class="type">char</span> *format, ...)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">snprintf</span><span class="params">(<span class="type">char</span> *str, <span class="type">size_t</span> size, <span class="type">const</span> <span class="type">char</span> *format, ...)</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdarg.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">vprintf</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *format, va_list ap)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">vfprintf</span><span class="params">(FILE *stream, <span class="type">const</span> <span class="type">char</span> *format, va_list ap)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">vsprintf</span><span class="params">(<span class="type">char</span> *str, <span class="type">const</span> <span class="type">char</span> *format, va_list ap)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">vsnprintf</span><span class="params">(<span class="type">char</span> *str, <span class="type">size_t</span> size, <span class="type">const</span> <span class="type">char</span> *format, va_list ap)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回值：成功返回格式化输出的字节数（不包括字符串的结尾&#x27;\0&#x27;），出错返回一个负值</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-9-C标准库的I-O缓冲区"><a href="#2-9-C标准库的I-O缓冲区" class="headerlink" title="2.9. C标准库的I&#x2F;O缓冲区"></a>2.9. C标准库的I&#x2F;O缓冲区</h4><p>C标准库为每个打开的文件分配一个I&#x2F;O缓冲区来加速读写操作（<em>通过FILE结构体可以找到这个缓冲区</em>）</p>
+<p>用户调用读写函数大多都是在I&#x2F;O缓冲区中读写，只有少数时候需要把读写请求传给内核</p>
+<ul>
+<li>第一次调用<code>fgetc</code>读一个字节时，<code>fgetc</code>函数可能通过系统调用进入内核读1K字节到I&#x2F;O缓冲区中，然后返回第一个字节给用户，把读写位置指向第二个字符</li>
+<li>以后用户再调用<code>fgetc</code>，就直接从I&#x2F;O缓冲区中读取</li>
+<li>当用户把这1K字节都读完之后，再次调用<code>fgetc</code>时，<code>fgetc</code>函数会再次进入内核读1K字节到I&#x2F;O缓冲区中</li>
+</ul>
+<p>用户程序调用<code>fputc</code>通常只是写到I&#x2F;O缓冲区中</p>
+<ul>
+<li>如果I&#x2F;O缓冲区写满了，就会把I&#x2F;O缓冲区的数据传给内核，内核最终把数据写回磁盘。</li>
+<li>如果希望立即把I&#x2F;O缓冲区的数据传给内核，让内核写回设备，就要进行Flush操作，对应的库函数是<code>fflush</code>，<code>fclose</code>函数在关闭文件前也会做Flush操作。</li>
+</ul>
+<p>C标准库的I&#x2F;O缓冲区有三种类型：全缓冲、行缓冲和无缓冲。当用户程序调用库函数做写操作时，不同类型的缓冲区具有不同的特性。</p>
+<ul>
+<li><p><strong>全缓冲：</strong>如果缓冲区写满了就写回内核。常规文件通常是全缓冲的。</p>
+</li>
+<li><p><strong>行缓冲：</strong> 如果用户程序写的数据中有换行符就把这一行写回内核，或者如果缓冲区写满了就写回内核。标准输入和标准输出对应终端设备时通常是行缓冲的。</p>
+<blockquote>
+<p>除了写满缓冲区、写入换行符之外，行缓冲还有一种情况会自动做Flush操作。如果：</p>
+<ul>
+<li>用户程序调用库函数从无缓冲的文件中读取</li>
+</ul>
+<ul>
+<li><p>或者从行缓冲的文件中读取，并且这次读操作会引发系统调用从内核读取数据</p>
+<blockquote>
+<p>虽然调用<code>printf</code>并不会把字符串写到设备，但紧接着调用<code>fgets</code>读一个行缓冲的文件（标准输入），在读取之前会自动Flush所有行缓冲，包括标准输出。</p>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+</li>
+<li><p><strong>无缓冲：</strong>用户程序每次调库函数做写操作都要通过系统调用写回内核。标准错误输出通常是无缓冲的，这样用户程序产生的错误信息可以尽快输出到设备。</p>
+</li>
+</ul>
+<p>如果用户程序不想完全依赖于自动的Flush操作，可以调<code>fflush</code>函数手动做Flush操作。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">fflush</span><span class="params">(FILE *stream)</span>;</span><br><span class="line"><span class="comment">// 返回值：成功返回0，出错返回EOF并设置errno</span></span><br></pre></td></tr></table></figure>
+
+<p>虽然字符串中没有换行，但用户程序调用<code>fflush</code>强制写回内核，因此也能在屏幕上打印出字符串。<code>fflush</code>函数用于确保数据写回了内核，以免进程异常终止时丢失数据。</p>
+<p>作为一个特例，调用<code>fflush(NULL)</code>可以对所有打开文件的I&#x2F;O缓冲区做Flush操作。</p>
+<p>[TODO] 练习题</p>
+<h2 id="一些奇奇怪怪的方法"><a href="#一些奇奇怪怪的方法" class="headerlink" title="一些奇奇怪怪的方法"></a>一些奇奇怪怪的方法</h2><h3 id="1-typedef-分析复杂声明"><a href="#1-typedef-分析复杂声明" class="headerlink" title="1. typedef 分析复杂声明"></a>1. typedef 分析复杂声明</h3><p>在分析复杂声明时，要借助typedef把复杂声明分解成几种基本形式：</p>
+<ul>
+<li><p>T *p;，p是指向T类型的指针。</p>
+</li>
+<li><p>T a[];，a是由T类型的元素组成的数组，但有一个例外，如果a是函数的形参，则相当于T *a;</p>
+</li>
+<li><p>T1 f(T2, T3…);，f是一个函数，参数类型是T2、T3等等，返回值类型是T1。</p>
+</li>
+</ul>
+<p>我们分解一下这个复杂声明：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> (*(*fp)(<span class="type">void</span> *))[<span class="number">10</span>];</span><br></pre></td></tr></table></figure>
+
+<p><em>1、fp和</em>号括在一起，说明fp是一个指针，指向T1类型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="title function_">int</span> <span class="params">(*T1(<span class="type">void</span> *))</span>[10];</span><br><span class="line">T1 *fp;</span><br></pre></td></tr></table></figure>
+
+<p>2、T1应该是一个函数类型，参数是void *，返回值是T2类型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="title function_">int</span> <span class="params">(*T2)</span>[10];</span><br><span class="line"><span class="keyword">typedef</span> T2 <span class="title function_">T1</span><span class="params">(<span class="type">void</span> *)</span>;</span><br><span class="line">T1 *fp;</span><br></pre></td></tr></table></figure>
+
+<p>3、T2和*号括在一起，应该也是个指针，指向T3类型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="type">int</span> T3[<span class="number">10</span>];</span><br><span class="line"><span class="keyword">typedef</span> T3 *T2;</span><br><span class="line"><span class="keyword">typedef</span> T2 <span class="title function_">T1</span><span class="params">(<span class="type">void</span> *)</span>;</span><br><span class="line">T1 *fp;</span><br></pre></td></tr></table></figure>
+
+<p>所以<code>fp</code>是一个 函数指针， 它对应的函数原型为<code>T2 T1(void *)</code>，返回值T2是一个指向<code>int [10]</code>数组的指针。</p>
+<h2 id="一些奇奇怪怪的实现"><a href="#一些奇奇怪怪的实现" class="headerlink" title="一些奇奇怪怪的实现"></a>一些奇奇怪怪的实现</h2><h3 id="1-计算1-2-…-n"><a href="#1-计算1-2-…-n" class="headerlink" title="1. 计算1+2+…+n"></a>1. 计算1+2+…+n</h3><p>求1+2+…+n, 要求不能使用乘除法、for、while、if、else、switch、case等关键字及条件判断语句(A?B:C)。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> a[n][n+<span class="number">1</span>];</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">sizeof</span> (a) &gt;&gt; <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-时间复杂度O-1-的一些与位操作有关的方法"><a href="#2-时间复杂度O-1-的一些与位操作有关的方法" class="headerlink" title="2. 时间复杂度O(1)的一些与位操作有关的方法"></a>2. 时间复杂度O(1)的一些与位操作有关的方法</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x &amp; <span class="number">1</span>;			<span class="comment">// x是否为奇数</span></span><br><span class="line">x &amp; (-x);		<span class="comment">// 获取x最低位的1</span></span><br><span class="line"><span class="keyword">typedef</span> (T) + (bnd) &amp; ~(bnd)		<span class="comment">// 获取bnd的整数倍(bnd二进制值必须是连续的1), 注意运算符优先级</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-GCC内置函数"><a href="#3-GCC内置函数" class="headerlink" title="3. GCC内置函数"></a>3. GCC内置函数</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">__builtin_ffs(x)		<span class="comment">// 返回x的最后一位1是从后向前第几位</span></span><br><span class="line">__builtin_clz(x)		<span class="comment">// 返回x的二进制下前导0的个数</span></span><br><span class="line">__builtin_ctz(x)		<span class="comment">// 返回x的二进制下末尾的0的个数</span></span><br><span class="line">__builtin_popcount(x)	<span class="comment">// 返回x的二进制下1的个数</span></span><br><span class="line">__builtin_parity(x)		<span class="comment">// x的奇偶性</span></span><br><span class="line">[TODO](https:<span class="comment">//blog.csdn.net/qq_21127151/article/details/106309611)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-不创建结构体实例计算结构体成员在结构体中的偏移量"><a href="#4-不创建结构体实例计算结构体成员在结构体中的偏移量" class="headerlink" title="4. 不创建结构体实例计算结构体成员在结构体中的偏移量"></a>4. 不创建结构体实例计算结构体成员在结构体中的偏移量</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> offsetof(TYPE, MEMBER) ((int)&amp;((TYPE *)0)-&gt;MEMBER)</span></span><br></pre></td></tr></table></figure>
+
+<p>这里的<code>&amp;</code>是取址运算符。</p>
+<h3 id="5-奇偶校验"><a href="#5-奇偶校验" class="headerlink" title="5. 奇偶校验"></a>5. 奇偶校验</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">long</span> <span class="title function_">func_a</span><span class="params">(<span class="type">unsigned</span> <span class="type">long</span> x)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">long</span> val = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (x) &#123;</span><br><span class="line">		val ^= x;</span><br><span class="line">		x &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> val &amp; <span class="number">0x1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>原理就是val的最后一位与x的每一位都进行了一次xor运算，因此若有奇数个1，最后一个也一定为1,即返回值为1。</p>
+<h2 id="GNU-C编译器扩展"><a href="#GNU-C编译器扩展" class="headerlink" title="GNU C编译器扩展"></a>GNU C编译器扩展</h2><h3 id="1-typeof扩展"><a href="#1-typeof扩展" class="headerlink" title="1. typeof扩展"></a>1. typeof扩展</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">typeof(x) y;</span><br><span class="line">typeof(x) x_ = x;</span><br></pre></td></tr></table></figure>
+
+<p><code>typeof</code> 是GCC的一个扩展，用于在C和C++代码中获取表达式的类型。尽管它不是C或C++标准的一部分，但它在GCC中非常有用，可以帮助你编写更加灵活和类型安全的代码。</p>
+<h3 id="2-语句表达式-…"><a href="#2-语句表达式-…" class="headerlink" title="2. 语句表达式 ({…})"></a>2. 语句表达式 ({…})</h3><p>语句表达式可以创建包含多个语句的匿名块，并从中返回一个值。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(&#123;</span><br><span class="line">    <span class="comment">// 包含多个语句的块</span></span><br><span class="line">    statement1;</span><br><span class="line">    statement2;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    last_statement; <span class="comment">// 这个语句的结果将作为整个表达式的值</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+          
+        <div class="top-div">
+          <ol class="top-box"><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0"><span class="top-box-text">C语言学习笔记</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="top-box-text">数据类型</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E6%95%B4%E5%9E%8B"><span class="top-box-text">整型</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="top-box-text">类型转换</span></a></li></ol></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E6%8C%87%E9%92%88"><span class="top-box-text">指针</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E6%8C%87%E9%92%88%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="top-box-text">指针初始化</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E9%80%9A%E7%94%A8%E6%8C%87%E9%92%88"><span class="top-box-text">通用指针</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E6%8C%87%E9%92%88%E4%B8%8E%E6%95%B0%E7%BB%84"><span class="top-box-text">指针与数组</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E6%8C%87%E5%90%91%E5%B8%B8%E9%87%8F%E7%9A%84%E6%8C%87%E9%92%88%E5%92%8C%E5%B8%B8%E9%87%8F%E6%8C%87%E9%92%88"><span class="top-box-text">指向常量的指针和常量指针</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E6%8C%87%E5%90%91%E6%95%B0%E7%BB%84%E7%9A%84%E6%8C%87%E9%92%88%E5%92%8C%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="top-box-text">指向数组的指针和多维数组</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88"><span class="top-box-text">函数指针</span></a></li></ol></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E4%B8%8D%E5%AE%8C%E5%85%A8%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%A4%8D%E6%9D%82%E5%A3%B0%E6%98%8E"><span class="top-box-text">不完全类型和复杂声明</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E5%87%BD%E6%95%B0%E6%8E%A5%E5%8F%A3"><span class="top-box-text">函数接口</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#1-%E9%A2%84%E5%A4%87%E7%9F%A5%E8%AF%86"><span class="top-box-text">1. 预备知识</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#2-%E4%BC%A0%E5%85%A5%E5%8F%82%E6%95%B0%E4%B8%8E%E4%BC%A0%E5%87%BA%E5%8F%82%E6%95%B0"><span class="top-box-text">2. 传入参数与传出参数</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#3-%E4%B8%A4%E5%B1%82%E6%8C%87%E9%92%88%E7%9A%84%E5%8F%82%E6%95%B0"><span class="top-box-text">3. 两层指针的参数</span></a></li></ol></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#C%E6%A0%87%E5%87%86%E5%BA%93"><span class="top-box-text">C标准库</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#1-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0"><span class="top-box-text">1. 字符串操作函数</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#2-%E6%A0%87%E5%87%86I-O%E5%BA%93%E5%87%BD%E6%95%B0"><span class="top-box-text">2. 标准I&#x2F;O库函数</span></a></li></ol></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E4%B8%80%E4%BA%9B%E5%A5%87%E5%A5%87%E6%80%AA%E6%80%AA%E7%9A%84%E6%96%B9%E6%B3%95"><span class="top-box-text">一些奇奇怪怪的方法</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#1-typedef-%E5%88%86%E6%9E%90%E5%A4%8D%E6%9D%82%E5%A3%B0%E6%98%8E"><span class="top-box-text">1. typedef 分析复杂声明</span></a></li></ol></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E4%B8%80%E4%BA%9B%E5%A5%87%E5%A5%87%E6%80%AA%E6%80%AA%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="top-box-text">一些奇奇怪怪的实现</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#1-%E8%AE%A1%E7%AE%971-2-%E2%80%A6-n"><span class="top-box-text">1. 计算1+2+…+n</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#2-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6O-1-%E7%9A%84%E4%B8%80%E4%BA%9B%E4%B8%8E%E4%BD%8D%E6%93%8D%E4%BD%9C%E6%9C%89%E5%85%B3%E7%9A%84%E6%96%B9%E6%B3%95"><span class="top-box-text">2. 时间复杂度O(1)的一些与位操作有关的方法</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#3-GCC%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="top-box-text">3. GCC内置函数</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#4-%E4%B8%8D%E5%88%9B%E5%BB%BA%E7%BB%93%E6%9E%84%E4%BD%93%E5%AE%9E%E4%BE%8B%E8%AE%A1%E7%AE%97%E7%BB%93%E6%9E%84%E4%BD%93%E6%88%90%E5%91%98%E5%9C%A8%E7%BB%93%E6%9E%84%E4%BD%93%E4%B8%AD%E7%9A%84%E5%81%8F%E7%A7%BB%E9%87%8F"><span class="top-box-text">4. 不创建结构体实例计算结构体成员在结构体中的偏移量</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#5-%E5%A5%87%E5%81%B6%E6%A0%A1%E9%AA%8C"><span class="top-box-text">5. 奇偶校验</span></a></li></ol></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#GNU-C%E7%BC%96%E8%AF%91%E5%99%A8%E6%89%A9%E5%B1%95"><span class="top-box-text">GNU C编译器扩展</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#1-typeof%E6%89%A9%E5%B1%95"><span class="top-box-text">1. typeof扩展</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#2-%E8%AF%AD%E5%8F%A5%E8%A1%A8%E8%BE%BE%E5%BC%8F-%E2%80%A6"><span class="top-box-text">2. 语句表达式 ({…})</span></a></li></ol></li></ol></li></ol>
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2023/10/17/%E5%9B%BE%E7%81%B5%E6%9C%BA%E4%BD%9C%E4%B8%9A/">
+          <h3 class="post-title">
+            下一篇：图灵机作业
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/hzrr" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  <script src="/js/simple-lightbox.min.js"></script><script>document.addEventListener('DOMContentLoaded', function() {new SimpleLightbox('.post-detail .simple-lightbox', {fileExt: false,captionsData:'alt'});});</script></body>
+</html>
+
